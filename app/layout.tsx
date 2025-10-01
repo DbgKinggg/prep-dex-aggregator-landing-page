@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { GeistSans } from "geist/font/sans";
 import { GeistMono } from "geist/font/mono";
 import "./globals.css";
+import { PrivyProvider } from "@/providers/PrivyProvider";
 
 export const metadata: Metadata = {
   title: "Tangerine - Perp DEX Aggregator",
@@ -16,7 +17,9 @@ export default function RootLayout({
   return (
     <html lang="en" className={`dark ${GeistSans.variable} ${GeistMono.variable}`}>
       <body className="antialiased font-sans">
-        {children}
+        <PrivyProvider>
+          {children}
+        </PrivyProvider>
       </body>
     </html>
   );
