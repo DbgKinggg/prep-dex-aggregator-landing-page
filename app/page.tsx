@@ -1,5 +1,6 @@
 'use client';
 
+import DecryptedText from '@/components/DecryptedText';
 import FaultyTerminal from '@/components/FaultyTerminal';
 import { useIsMobile } from '@/hooks/useIsMobile';
 
@@ -7,7 +8,16 @@ export default function Home() {
   const isMobile = useIsMobile();
 
   return (
-    <div className="relative w-screen h-screen overflow-hidden bg-background">
+    <div className="relative w-screen h-screen overflow-hidden bg-background p-2">
+      {/* Glassmorphic Navbar */}
+      <nav className="fixed top-6 left-1/2 -translate-x-1/2 z-50 pointer-events-auto max-w-4xl w-full px-2">
+        <div className="backdrop-blur-md bg-black/40 border border-white/10 rounded-full px-8 py-4 shadow-2xl">
+          <h1 className="text-xl font-bold tracking-tight text-white">
+            TANGERINE
+          </h1>
+        </div>
+      </nav>
+
       {/* FaultyTerminal Background */}
       <div
         className="fixed inset-0"
@@ -45,18 +55,24 @@ export default function Home() {
       <div className="relative z-10 flex flex-col items-center justify-center w-screen h-screen px-6 text-center pointer-events-none">
         <div className="max-w-4xl mx-auto space-y-8">
           {/* Headline */}
-          <h1 className="text-5xl sm:text-6xl md:text-7xl font-bold tracking-tight text-white">
-            TANGERINE
-          </h1>
+          <h2 className="text-5xl sm:text-6xl md:text-7xl font-bold tracking-tight text-white">
+            Perp DEX
+            <br />
+            <span className="text-6xl sm:text-8xl font-bold">Aggregator</span>
+          </h2>
 
-          {/* Subheadline */}
-          <p className="text-lg sm:text-xl md:text-2xl text-white/70 max-w-2xl mx-auto">
-            Making perp trading as simple as swapping tokens.
+          <p className="text-lg sm:text-xl md:text-2xl text-white/80 max-w-2xl mx-auto font-semibold">
+            <DecryptedText
+              text="The 1inch for Perp Trading."
+              animateOn="view"
+              revealDirection="center"
+              speed={100}
+              maxIterations={20}
+            />
           </p>
 
-          {/* Join Waitlist Button */}
-          <div className="pt-6">
-            <button className="group relative inline-flex items-center justify-center px-8 py-4 text-lg font-semibold text-black bg-white rounded-full hover:bg-white/90 transition-all duration-200 shadow-lg hover:shadow-xl hover:scale-105">
+          <div className="pt-6 pointer-events-auto">
+            <button className="group relative inline-flex items-center cursor-pointer justify-center px-8 py-4 text-lg font-semibold text-black bg-white rounded-full hover:bg-white/90 transition-all duration-200 shadow-lg hover:shadow-xl hover:scale-105">
               Join Waitlist
               <svg
                 className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform duration-200"
