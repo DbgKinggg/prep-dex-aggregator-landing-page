@@ -1,49 +1,59 @@
 'use client';
 
-import PixelBlast from '@/components/PixelBlast';
+import FaultyTerminal from '@/components/FaultyTerminal';
 
 export default function Home() {
   return (
-    <div className="relative min-h-screen w-full overflow-hidden bg-background">
-      {/* PixelBlast Background */}
-      <div className="absolute inset-0 z-0">
-        <PixelBlast
-          variant="circle"
-          pixelSize={4}
-          color="#f97316" // Tangerine orange for light mode
-          patternScale={2.5}
-          patternDensity={0.8}
-          liquid={true}
-          liquidStrength={0.15}
-          liquidRadius={1.2}
-          enableRipples={true}
-          rippleIntensityScale={1.5}
-          rippleSpeed={0.4}
-          speed={0.3}
-          transparent={true}
-          edgeFade={0.3}
-          className="w-full h-full"
+    <div className="relative w-screen h-screen overflow-hidden bg-background">
+      {/* FaultyTerminal Background */}
+      <div
+        className="fixed inset-0"
+        style={{
+          zIndex: 0,
+          width: '100vw',
+          height: '100vh',
+          position: 'fixed',
+          top: 0,
+          left: 0
+        }}
+      >
+        <FaultyTerminal
+          scale={1.5}
+          gridMul={[2, 1]}
+          digitSize={1.2}
+          timeScale={1}
+          pause={false}
+          scanlineIntensity={0.3}
+          glitchAmount={0.5}
+          flickerAmount={0.3}
+          noiseAmp={0.5}
+          chromaticAberration={0}
+          dither={0}
+          curvature={0.24}
+          tint="#ff7c3a"
+          mouseReact={true}
+          mouseStrength={0.5}
+          pageLoadAnimation={false}
+          brightness={1.2}
         />
       </div>
 
       {/* Content */}
-      <div className="relative z-10 flex flex-col items-center justify-center min-h-screen px-6 text-center">
+      <div className="relative z-10 flex flex-col items-center justify-center w-screen h-screen px-6 text-center">
         <div className="max-w-4xl mx-auto space-y-8">
           {/* Headline */}
-          <h1 className="text-5xl sm:text-6xl md:text-7xl font-bold tracking-tight text-foreground">
-            Perpetual DEX
-            <br />
-            <span className="text-primary">Aggregator</span>
+          <h1 className="text-5xl sm:text-6xl md:text-7xl font-bold tracking-tight text-white">
+            TANGERINE
           </h1>
 
           {/* Subheadline */}
-          <p className="text-lg sm:text-xl md:text-2xl text-muted-foreground max-w-2xl mx-auto">
-            Trade smarter across multiple perpetual DEXs. Best prices, unified interface.
+          <p className="text-lg sm:text-xl md:text-2xl text-white/70 max-w-2xl mx-auto">
+            Making perp trading as simple as swapping tokens.
           </p>
 
           {/* Join Waitlist Button */}
           <div className="pt-6">
-            <button className="group relative inline-flex items-center justify-center px-8 py-4 text-lg font-semibold text-primary-foreground bg-primary rounded-full hover:bg-primary/90 transition-all duration-200 shadow-lg hover:shadow-xl hover:scale-105">
+            <button className="group relative inline-flex items-center justify-center px-8 py-4 text-lg font-semibold text-black bg-white rounded-full hover:bg-white/90 transition-all duration-200 shadow-lg hover:shadow-xl hover:scale-105">
               Join Waitlist
               <svg
                 className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform duration-200"
