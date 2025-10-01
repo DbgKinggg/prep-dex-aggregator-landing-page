@@ -1,8 +1,11 @@
 'use client';
 
 import FaultyTerminal from '@/components/FaultyTerminal';
+import { useIsMobile } from '@/hooks/useIsMobile';
 
 export default function Home() {
+  const isMobile = useIsMobile();
+
   return (
     <div className="relative w-screen h-screen overflow-hidden bg-background">
       {/* FaultyTerminal Background */}
@@ -18,13 +21,13 @@ export default function Home() {
         }}
       >
         <FaultyTerminal
-          scale={1.5}
+          scale={isMobile ? 1 : 1.5}
           gridMul={[2, 1]}
           digitSize={1.2}
           timeScale={1}
           pause={false}
           scanlineIntensity={0.3}
-          glitchAmount={0.5}
+          glitchAmount={isMobile ? 0.8 : 0.5}
           flickerAmount={0.3}
           noiseAmp={0.5}
           chromaticAberration={0}
@@ -32,14 +35,14 @@ export default function Home() {
           curvature={0.24}
           tint="#ff7c3a"
           mouseReact={true}
-          mouseStrength={0.5}
+          mouseStrength={0.1}
           pageLoadAnimation={false}
           brightness={1.2}
         />
       </div>
 
       {/* Content */}
-      <div className="relative z-10 flex flex-col items-center justify-center w-screen h-screen px-6 text-center">
+      <div className="relative z-10 flex flex-col items-center justify-center w-screen h-screen px-6 text-center pointer-events-none">
         <div className="max-w-4xl mx-auto space-y-8">
           {/* Headline */}
           <h1 className="text-5xl sm:text-6xl md:text-7xl font-bold tracking-tight text-white">
