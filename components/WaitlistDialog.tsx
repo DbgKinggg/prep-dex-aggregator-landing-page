@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { usePrivy } from '@privy-io/react-auth';
 import { useIsMobile } from '@/hooks/useIsMobile';
 import {
@@ -30,6 +30,7 @@ export function WaitlistDialog({ open, onOpenChange }: WaitlistDialogProps) {
   const isMobile = useIsMobile();
   const { login, logout, user } = usePrivy();
   const [email, setEmail] = useState('');
+  const shouldReopenAfterLogin = useRef(false);
 
   // Get wallet address and email from Privy user
   const walletAddress = user?.wallet?.address || '';
@@ -42,7 +43,19 @@ export function WaitlistDialog({ open, onOpenChange }: WaitlistDialogProps) {
     }
   }, [userEmail, email]);
 
+  // Reopen dialog after successful login
+  useEffect(() => {
+    if (walletAddress && shouldReopenAfterLogin.current) {
+      shouldReopenAfterLogin.current = false;
+      onOpenChange(true);
+    }
+  }, [walletAddress, onOpenChange]);
+
   const handleConnectWallet = async () => {
+    // Mark that we should reopen after login
+    shouldReopenAfterLogin.current = true;
+    // Close the dialog before opening Privy login
+    onOpenChange(false);
     login();
   };
 
@@ -63,7 +76,7 @@ export function WaitlistDialog({ open, onOpenChange }: WaitlistDialogProps) {
     onOpenChange(false);
   };
 
-  const FormContent = () => (
+  const formContent = (
     <form onSubmit={handleSubmit} className="space-y-6">
       <div className="space-y-2">
         <Label htmlFor="address">Wallet Address</Label>
@@ -137,13 +150,9 @@ export function WaitlistDialog({ open, onOpenChange }: WaitlistDialogProps) {
         <DrawerContent>
           <DrawerHeader>
             <DrawerTitle>Join the Waitlist</DrawerTitle>
-            <DrawerDescription>
-              Connect your wallet and optionally provide your email to join the
-              waitlist.
-            </DrawerDescription>
           </DrawerHeader>
           <div className="px-4 pb-8">
-            <FormContent />
+            {formContent}
           </div>
         </DrawerContent>
       </Drawer>
@@ -152,15 +161,11 @@ export function WaitlistDialog({ open, onOpenChange }: WaitlistDialogProps) {
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent>
+      <DialogContent onOpenAutoFocus={(e) => e.preventDefault()}>
         <DialogHeader>
           <DialogTitle>Join the Waitlist</DialogTitle>
-          <DialogDescription>
-            Connect your wallet and optionally provide your email to join the
-            waitlist.
-          </DialogDescription>
         </DialogHeader>
-        <FormContent />
+        {formContent}
       </DialogContent>
     </Dialog>
   );
