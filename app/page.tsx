@@ -1,20 +1,44 @@
 'use client';
 
+import { useState } from 'react';
 import DecryptedText from '@/components/DecryptedText';
 import FaultyTerminal from '@/components/FaultyTerminal';
+import { WaitlistDialog } from '@/components/WaitlistDialog';
 import { useIsMobile } from '@/hooks/useIsMobile';
+import { usePrivy } from '@privy-io/react-auth';
+import { Button } from '@/components/ui/button';
 
 export default function Home() {
   const isMobile = useIsMobile();
+  const [waitlistOpen, setWaitlistOpen] = useState(false);
+  const { login, logout, user } = usePrivy();
+  const walletAddress = user?.wallet?.address || '';
 
   return (
     <div className="relative w-screen h-screen overflow-hidden bg-background p-2">
       {/* Glassmorphic Navbar */}
       <nav className="fixed top-6 left-1/2 -translate-x-1/2 z-50 pointer-events-auto max-w-4xl w-full px-2">
-        <div className="backdrop-blur-md bg-black/40 border border-white/10 rounded-full px-8 py-4 shadow-2xl">
+        <div className="backdrop-blur-md bg-black/40 border border-white/10 rounded-full px-8 py-4 shadow-2xl flex items-center justify-between">
           <h1 className="text-xl font-bold tracking-tight text-white">
             TANGERINE
           </h1>
+          {walletAddress ? (
+            <Button
+              onClick={() => logout()}
+              variant="outline"
+              className="bg-white/10 border-white/20 text-white hover:bg-white/20"
+            >
+              {walletAddress.slice(0, 6)}...{walletAddress.slice(-4)}
+            </Button>
+          ) : (
+            <Button
+              onClick={() => login()}
+              variant="outline"
+              className="bg-white/10 border-white/20 text-white hover:bg-white/20"
+            >
+              Connect Wallet
+            </Button>
+          )}
         </div>
       </nav>
 
@@ -72,7 +96,10 @@ export default function Home() {
           </p>
 
           <div className="pt-6 pointer-events-auto">
-            <button className="group relative inline-flex items-center cursor-pointer justify-center px-8 py-4 text-lg font-semibold text-black bg-white rounded-full hover:bg-white/90 transition-all duration-200 shadow-lg hover:shadow-xl hover:scale-105">
+            <button
+              onClick={() => setWaitlistOpen(true)}
+              className="group relative inline-flex items-center cursor-pointer justify-center px-8 py-4 text-lg font-semibold text-black bg-white rounded-full hover:bg-white/90 transition-all duration-200 shadow-lg hover:shadow-xl hover:scale-105"
+            >
               Join Waitlist
               <svg
                 className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform duration-200"
@@ -91,6 +118,8 @@ export default function Home() {
           </div>
         </div>
       </div>
+
+      <WaitlistDialog open={waitlistOpen} onOpenChange={setWaitlistOpen} />
     </div>
   );
 }

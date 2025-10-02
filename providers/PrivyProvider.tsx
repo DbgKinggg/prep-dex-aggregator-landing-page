@@ -32,10 +32,14 @@ export function PrivyProvider({ children }: { children: React.ReactNode }) {
           accentColor: '#ff7c3a', // Tangerine color
           logo: undefined,
         },
-        loginMethods: ['email', 'wallet', 'google'],
+        loginMethods: ['wallet'],
         embeddedWallets: {
           createOnLogin: 'users-without-wallets',
         },
+      }}
+      onSuccess={() => {
+        // Privy modal will close, but parent dialog should remain open
+        // This is handled by not calling onOpenChange(false) in WaitlistDialog
       }}
     >
       <QueryClientProvider client={queryClient}>
