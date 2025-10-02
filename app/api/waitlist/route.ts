@@ -87,10 +87,18 @@ export async function POST(request: NextRequest) {
     }
 
     // Get IP address and user agent
-    const ip =
-      request.headers.get('x-forwarded-for')?.split(',')[0] ||
+    let ip =
+      request.headers.get('x-forwarded-for')?.split(',')[0]?.trim() ||
       request.headers.get('x-real-ip') ||
+      request.headers.get('cf-connecting-ip') || // Cloudflare
+      request.headers.get('x-client-ip') ||
       'unknown';
+
+    // Convert IPv6 localhost to IPv4 for consistency
+    if (ip === '::1' || ip === '::ffff:127.0.0.1') {
+      ip = '127.0.0.1';
+    }
+
     const userAgent = request.headers.get('user-agent') || 'unknown';
 
     // Store in Postgres
