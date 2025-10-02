@@ -52,8 +52,6 @@ export function WaitlistDialog({ open, onOpenChange }: WaitlistDialogProps) {
   }, [walletAddress, onOpenChange]);
 
   const handleConnectWallet = async () => {
-    // Mark that we should reopen after login
-    shouldReopenAfterLogin.current = true;
     // Close the dialog before opening Privy login
     onOpenChange(false);
     login();
@@ -150,6 +148,10 @@ export function WaitlistDialog({ open, onOpenChange }: WaitlistDialogProps) {
         <DrawerContent>
           <DrawerHeader>
             <DrawerTitle>Join the Waitlist</DrawerTitle>
+            <DrawerDescription>
+              Connect your wallet to join the
+              waitlist.
+            </DrawerDescription>
           </DrawerHeader>
           <div className="px-4 pb-8">
             {formContent}
@@ -164,6 +166,10 @@ export function WaitlistDialog({ open, onOpenChange }: WaitlistDialogProps) {
       <DialogContent onOpenAutoFocus={(e) => e.preventDefault()}>
         <DialogHeader>
           <DialogTitle>Join the Waitlist</DialogTitle>
+          <DialogDescription>
+            Connect your wallet to join the
+            waitlist.
+          </DialogDescription>
         </DialogHeader>
         {formContent}
       </DialogContent>
