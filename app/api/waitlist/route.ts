@@ -1,10 +1,18 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { PrivyClient } from '@privy-io/server-auth';
 import { prisma } from '@/lib/prisma';
 import { isAddress } from 'viem';
+import { Prisma } from '@prisma/client';
+
+interface WaitlistRequestBody {
+  walletAddress: string;
+  email?: string;
+  privyToken: string;
+}
 
 export async function POST(request: NextRequest) {
   try {
-    const body = await request.json();
+    const body = (await request.json()) as WaitlistRequestBody;
     const { walletAddress, email, privyToken } = body;
 
     // Validate required fields
@@ -35,54 +43,41 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Verify the token with Privy
-    const verifyResponse = await fetch(
-      'https://auth.privy.io/api/v1/verification_keys',
-      {
-        headers: {
-          'privy-app-id': privyAppId,
-          Authorization: `Bearer ${privyAppSecret}`,
-        },
-      }
-    );
+    // Initialize Privy client
+    const privy = new PrivyClient(privyAppId, privyAppSecret);
 
-    if (!verifyResponse.ok) {
-      return NextResponse.json(
-        { error: 'Authentication verification failed' },
-        { status: 401 }
-      );
-    }
-
-    // Decode and verify the JWT token
-    const jose = await import('jose');
-    const jwks = await verifyResponse.json();
-
+    // Verify the token and get user data
     try {
-      const JWKS = jose.createRemoteJWKSet(
-        new URL('https://auth.privy.io/api/v1/verification_keys')
-      );
+      const claims = await privy.verifyAuthToken(privyToken);
 
-      const { payload } = await jose.jwtVerify(privyToken, JWKS, {
-        issuer: 'privy.io',
-        audience: privyAppId,
-      });
+      // Get user data from Privy
+      const user = await privy.getUser(claims.userId);
 
       // Verify the wallet address matches the authenticated user
-      const userWallets = (payload as any).linked_accounts?.filter(
-        (account: any) => account.type === 'wallet'
+      const userWallets = user.linkedAccounts.filter(
+        (account) => account.type === 'wallet'
       );
 
-      const walletMatches = userWallets?.some(
-        (wallet: any) =>
-          wallet.address?.toLowerCase() === walletAddress.toLowerCase()
+      const walletMatches = userWallets.some(
+        (wallet) =>
+          'address' in wallet &&
+          wallet.address.toLowerCase() === walletAddress.toLowerCase()
       );
 
       if (!walletMatches) {
+        console.error('Wallet verification failed:', {
+          requestedWallet: walletAddress,
+          userWallets: userWallets
+            .filter((w) => 'address' in w)
+            .map((w) => 'address' in w ? w.address : null),
+        });
         return NextResponse.json(
           { error: 'Wallet address does not match authenticated user' },
           { status: 403 }
         );
       }
+
+      console.log('User authenticated successfully with wallet:', walletAddress);
     } catch (verifyError) {
       console.error('Token verification error:', verifyError);
       return NextResponse.json(
@@ -120,13 +115,15 @@ export async function POST(request: NextRequest) {
         },
         { status: 201 }
       );
-    } catch (dbError: any) {
+    } catch (dbError) {
       // Check for unique constraint violation (duplicate wallet)
-      if (dbError.code === 'P2002') {
-        return NextResponse.json(
-          { error: 'Wallet address already registered' },
-          { status: 409 }
-        );
+      if (dbError instanceof Prisma.PrismaClientKnownRequestError) {
+        if (dbError.code === 'P2002') {
+          return NextResponse.json(
+            { error: 'Wallet address already registered' },
+            { status: 409 }
+          );
+        }
       }
       throw dbError;
     }

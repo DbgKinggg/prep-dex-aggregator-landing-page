@@ -21,7 +21,7 @@ export default function RootLayout({
         <PrivyProvider>
           {children}
         </PrivyProvider>
-        <Toaster richColors closeButton position="top-center" />
+        <Toaster theme="dark" richColors closeButton position="top-center" />
       </body>
     </html>
   );
