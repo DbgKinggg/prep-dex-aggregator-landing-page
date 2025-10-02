@@ -4,6 +4,7 @@ import { useState, useEffect, useRef } from 'react';
 import { usePrivy } from '@privy-io/react-auth';
 import { useIsMobile } from '@/hooks/useIsMobile';
 import { toast } from 'sonner';
+import JSConfetti from 'js-confetti';
 import {
   Dialog,
   DialogContent,
@@ -34,6 +35,12 @@ export function WaitlistDialog({ open, onOpenChange }: WaitlistDialogProps) {
   const [email, setEmail] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
   const shouldReopenAfterLogin = useRef(false);
+  const confettiRef = useRef<JSConfetti | null>(null);
+
+  // Initialize confetti
+  useEffect(() => {
+    confettiRef.current = new JSConfetti();
+  }, []);
 
   // Get wallet address and email from Privy user
   const walletAddress = user?.wallet?.address || '';
@@ -112,6 +119,14 @@ export function WaitlistDialog({ open, onOpenChange }: WaitlistDialogProps) {
 
       // Success
       toast.success('Successfully joined the waitlist!');
+
+      // Trigger confetti with tangerine emojis
+      confettiRef.current?.addConfetti({
+        emojis: ['🍊'],
+        emojiSize: 100,
+        confettiNumber: 50,
+      });
+
       setEmail('');
       onOpenChange(false);
     } catch (error) {
