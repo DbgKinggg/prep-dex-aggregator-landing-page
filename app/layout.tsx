@@ -3,6 +3,7 @@ import { GeistSans } from "geist/font/sans";
 import { GeistMono } from "geist/font/mono";
 import "./globals.css";
 import { PrivyProvider } from "@/providers/PrivyProvider";
+import { Toaster } from "sonner";
 
 export const metadata: Metadata = {
   title: "Tangerine - Perp DEX Aggregator",
@@ -20,6 +21,7 @@ export default function RootLayout({
         <PrivyProvider>
           {children}
         </PrivyProvider>
+        <Toaster richColors closeButton position="top-center" />
       </body>
     </html>
   );

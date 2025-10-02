@@ -3,6 +3,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { usePrivy } from '@privy-io/react-auth';
 import { useIsMobile } from '@/hooks/useIsMobile';
+import { toast } from 'sonner';
 import {
   Dialog,
   DialogContent,
@@ -68,7 +69,7 @@ export function WaitlistDialog({ open, onOpenChange }: WaitlistDialogProps) {
     e.preventDefault();
 
     if (!walletAddress) {
-      alert('Please connect your wallet first');
+      toast.error('Please connect your wallet first');
       return;
     }
 
@@ -79,7 +80,8 @@ export function WaitlistDialog({ open, onOpenChange }: WaitlistDialogProps) {
       const privyToken = await getAccessToken();
 
       if (!privyToken) {
-        alert('Authentication failed. Please try logging in again.');
+        toast.error('Authentication failed. Please try logging in again.');
+        setIsSubmitting(false);
         return;
       }
 
@@ -100,20 +102,20 @@ export function WaitlistDialog({ open, onOpenChange }: WaitlistDialogProps) {
 
       if (!response.ok) {
         if (response.status === 409) {
-          alert('This wallet address is already registered on the waitlist.');
+          toast.warning('This wallet address is already registered on the waitlist.');
         } else {
-          alert(data.error || 'Failed to join waitlist. Please try again.');
+          toast.error(data.error || 'Failed to join waitlist. Please try again.');
         }
         return;
       }
 
       // Success
-      alert('Successfully joined the waitlist!');
+      toast.success('Successfully joined the waitlist!');
       setEmail('');
       onOpenChange(false);
     } catch (error) {
       console.error('Waitlist submission error:', error);
-      alert('An error occurred. Please try again.');
+      toast.error('An error occurred. Please try again.');
     } finally {
       setIsSubmitting(false);
     }
