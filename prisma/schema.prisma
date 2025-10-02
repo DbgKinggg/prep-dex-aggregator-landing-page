@@ -1,0 +1,22 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Waitlist {
+  id           Int      @id @default(autoincrement())
+  walletAddress String   @unique @map("wallet_address") @db.VarChar(42)
+  email        String?  @db.VarChar(255)
+  ip           String   @db.VarChar(45)
+  userAgent    String   @map("user_agent") @db.VarChar(512)
+  createdAt    DateTime @default(now()) @map("created_at")
+
+  @@map("waitlist")
+}

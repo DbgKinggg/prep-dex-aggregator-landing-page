@@ -1,6 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { db } from '@/lib/db';
-import { waitlist } from '@/lib/schema';
+import { prisma } from '@/lib/prisma';
 import { isAddress } from 'viem';
 
 export async function POST(request: NextRequest) {
@@ -101,15 +100,14 @@ export async function POST(request: NextRequest) {
 
     // Store in Postgres
     try {
-      const [result] = await db
-        .insert(waitlist)
-        .values({
+      const result = await prisma.waitlist.create({
+        data: {
           walletAddress: walletAddress.toLowerCase(),
           email: email || null,
           ip,
           userAgent,
-        })
-        .returning();
+        },
+      });
 
       return NextResponse.json(
         {
@@ -124,7 +122,7 @@ export async function POST(request: NextRequest) {
       );
     } catch (dbError: any) {
       // Check for unique constraint violation (duplicate wallet)
-      if (dbError.code === '23505') {
+      if (dbError.code === 'P2002') {
         return NextResponse.json(
           { error: 'Wallet address already registered' },
           { status: 409 }

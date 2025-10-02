@@ -57,20 +57,25 @@ pnpm db:stop
 
 ### Database Management
 
-- **View database with Drizzle Studio**:
+- **View database with Prisma Studio**:
   ```bash
   pnpm db:studio
   ```
-  Opens at [http://localhost:4983](http://localhost:4983)
+  Opens at [http://localhost:5555](http://localhost:5555)
 
-- **Generate migrations**:
+- **Generate Prisma Client**:
   ```bash
   pnpm db:generate
   ```
 
-- **Apply migrations**:
+- **Create and apply migrations**:
   ```bash
   pnpm db:migrate
+  ```
+
+- **Push schema without migrations** (development only):
+  ```bash
+  pnpm db:push
   ```
 
 ## Features
