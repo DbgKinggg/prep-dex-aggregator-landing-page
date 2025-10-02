@@ -28,8 +28,9 @@ interface WaitlistDialogProps {
 
 export function WaitlistDialog({ open, onOpenChange }: WaitlistDialogProps) {
   const isMobile = useIsMobile();
-  const { login, logout, user } = usePrivy();
+  const { login, logout, user, getAccessToken } = usePrivy();
   const [email, setEmail] = useState('');
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const shouldReopenAfterLogin = useRef(false);
 
   // Get wallet address and email from Privy user
@@ -52,6 +53,8 @@ export function WaitlistDialog({ open, onOpenChange }: WaitlistDialogProps) {
   }, [walletAddress, onOpenChange]);
 
   const handleConnectWallet = async () => {
+    // Mark that we should reopen after login
+    shouldReopenAfterLogin.current = true;
     // Close the dialog before opening Privy login
     onOpenChange(false);
     login();
@@ -61,17 +64,59 @@ export function WaitlistDialog({ open, onOpenChange }: WaitlistDialogProps) {
     await logout();
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+
     if (!walletAddress) {
       alert('Please connect your wallet first');
       return;
     }
-    // Handle form submission here
-    console.log({ address: walletAddress, email });
-    // Reset form and close dialog
-    setEmail('');
-    onOpenChange(false);
+
+    setIsSubmitting(true);
+
+    try {
+      // Get Privy access token for authentication
+      const privyToken = await getAccessToken();
+
+      if (!privyToken) {
+        alert('Authentication failed. Please try logging in again.');
+        return;
+      }
+
+      // Submit to API
+      const response = await fetch('/api/waitlist', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          walletAddress,
+          email: email || undefined,
+          privyToken,
+        }),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        if (response.status === 409) {
+          alert('This wallet address is already registered on the waitlist.');
+        } else {
+          alert(data.error || 'Failed to join waitlist. Please try again.');
+        }
+        return;
+      }
+
+      // Success
+      alert('Successfully joined the waitlist!');
+      setEmail('');
+      onOpenChange(false);
+    } catch (error) {
+      console.error('Waitlist submission error:', error);
+      alert('An error occurred. Please try again.');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const formContent = (
@@ -136,8 +181,12 @@ export function WaitlistDialog({ open, onOpenChange }: WaitlistDialogProps) {
         </div>
       </div>
 
-      <Button type="submit" className="w-full" disabled={!walletAddress}>
-        Join Waitlist
+      <Button
+        type="submit"
+        className="w-full"
+        disabled={!walletAddress || isSubmitting}
+      >
+        {isSubmitting ? 'Submitting...' : 'Join Waitlist'}
       </Button>
     </form>
   );
