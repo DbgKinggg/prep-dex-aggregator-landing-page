@@ -21,6 +21,7 @@ import {
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
+import { Loader2 } from 'lucide-react';
 
 interface WaitlistDialogProps {
   open: boolean;
@@ -138,7 +139,7 @@ export function WaitlistDialog({ open, onOpenChange }: WaitlistDialogProps) {
             <Button
               type="button"
               onClick={handleDisconnectWallet}
-              className="w-full"
+              className="w-full cursor-pointer"
               variant="outline"
             >
               Disconnect Wallet
@@ -147,7 +148,7 @@ export function WaitlistDialog({ open, onOpenChange }: WaitlistDialogProps) {
             <Button
               type="button"
               onClick={handleConnectWallet}
-              className="w-full"
+              className="w-full cursor-pointer"
               variant="outline"
             >
               Connect Wallet
@@ -174,7 +175,7 @@ export function WaitlistDialog({ open, onOpenChange }: WaitlistDialogProps) {
             <Button
               type="button"
               onClick={handleDisconnectWallet}
-              className="w-full"
+              className="w-full cursor-pointer"
               variant="outline"
             >
               Logout
@@ -185,10 +186,17 @@ export function WaitlistDialog({ open, onOpenChange }: WaitlistDialogProps) {
 
       <Button
         type="submit"
-        className="w-full"
+        className="w-full cursor-pointer"
         disabled={!walletAddress || isSubmitting}
       >
-        {isSubmitting ? 'Submitting...' : 'Join Waitlist'}
+        {isSubmitting ? (
+          <>
+            <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+            Submitting...
+          </>
+        ) : (
+          'Join Waitlist'
+        )}
       </Button>
     </form>
   );
