@@ -97,7 +97,7 @@ export default function Home() {
             </span>
           </h2>
 
-          <p className="text-lg sm:text-xl md:text-2xl text-white/80 max-w-2xl mx-auto font-semibold">
+          <div className="text-lg sm:text-xl md:text-2xl text-white/80 max-w-2xl mx-auto font-semibold h-24 sm:h-20 flex items-center justify-center">
             <TextRotate
               texts={[
                 'The 1inch for Perp Trading',
@@ -107,7 +107,7 @@ export default function Home() {
               ]}
               rotationInterval={3000}
             />
-          </p>
+          </div>
 
           <div className="pt-6 pointer-events-auto">
             <button
