@@ -7,11 +7,11 @@ import { toast } from 'sonner';
 import JSConfetti from 'js-confetti';
 import {
   Dialog,
-  DialogContent,
+  DialogPopup,
   DialogDescription,
   DialogHeader,
   DialogTitle,
-} from '@/components/ui/dialog';
+} from '@/components/animate-ui/components/base/dialog';
 import {
   Drawer,
   DrawerContent,
@@ -237,16 +237,15 @@ export function WaitlistDialog({ open, onOpenChange }: WaitlistDialogProps) {
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent onOpenAutoFocus={(e) => e.preventDefault()}>
+      <DialogPopup>
         <DialogHeader>
           <DialogTitle>Join the Waitlist</DialogTitle>
           <DialogDescription>
-            Connect your wallet to join the
-            waitlist.
+            Connect your wallet to join the waitlist.
           </DialogDescription>
         </DialogHeader>
         {formContent}
-      </DialogContent>
+      </DialogPopup>
     </Dialog>
   );
 }

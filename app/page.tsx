@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import Image from 'next/image';
 import DecryptedText from '@/components/DecryptedText';
 import FaultyTerminal from '@/components/FaultyTerminal';
 import { WaitlistDialog } from '@/components/WaitlistDialog';
@@ -19,9 +20,16 @@ export default function Home() {
       {/* Glassmorphic Navbar */}
       <nav className="fixed top-6 left-1/2 -translate-x-1/2 z-50 pointer-events-auto max-w-4xl w-full px-2">
         <div className="backdrop-blur-[10px] bg-white/5 border border-white/20 rounded-[50px] px-8 py-4 shadow-[0_4px_30px_rgba(0,0,0,0.1)] flex items-center justify-between">
-          <h1 className="text-xl font-bold tracking-tight text-white">
-            TANGERINE
-          </h1>
+          <div className="flex items-center">
+            <Image
+              src="/logo-with-text-white.png"
+              alt="Tangerine"
+              width={160}
+              height={40}
+              className="h-8 w-auto"
+            />
+            <h1 className="sr-only">TANGERINE</h1>
+          </div>
           {walletAddress ? (
             <Button
               onClick={() => logout()}
