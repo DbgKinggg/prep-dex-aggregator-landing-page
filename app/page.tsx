@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import Image from 'next/image';
-import DecryptedText from '@/components/DecryptedText';
+import TextRotate from '@/components/TextRotate';
 import FaultyTerminal from '@/components/FaultyTerminal';
 import { WaitlistDialog } from '@/components/WaitlistDialog';
 import { useIsMobile } from '@/hooks/useIsMobile';
@@ -98,12 +98,14 @@ export default function Home() {
           </h2>
 
           <p className="text-lg sm:text-xl md:text-2xl text-white/80 max-w-2xl mx-auto font-semibold">
-            <DecryptedText
-              text="The 1inch for Perp Trading."
-              animateOn="view"
-              revealDirection="center"
-              speed={100}
-              maxIterations={20}
+            <TextRotate
+              texts={[
+                'The 1inch for Perp Trading',
+                'One interface. All perp DEXs',
+                "Perp trading doesn't have to be rocket science",
+                'Turn market inefficiencies into profit opportunities',
+              ]}
+              rotationInterval={3000}
             />
           </p>
 
