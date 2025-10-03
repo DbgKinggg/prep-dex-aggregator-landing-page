@@ -1,7 +1,8 @@
 'use client';
 
 import { useState, useEffect, useRef } from 'react';
-import { usePrivy } from '@privy-io/react-auth';
+import { useAccount, useDisconnect, useSignMessage } from 'wagmi';
+import { useAppKit } from '@reown/appkit/react';
 import { useIsMobile } from '@/hooks/useIsMobile';
 import { toast } from 'sonner';
 import JSConfetti from 'js-confetti';
@@ -31,7 +32,10 @@ interface WaitlistDialogProps {
 
 export function WaitlistDialog({ open, onOpenChange }: WaitlistDialogProps) {
   const isMobile = useIsMobile();
-  const { login, logout, user, getAccessToken } = usePrivy();
+  const { open: openModal } = useAppKit();
+  const { address, isConnected } = useAccount();
+  const { disconnect } = useDisconnect();
+  const { signMessageAsync } = useSignMessage();
   const [email, setEmail] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
   const shouldReopenAfterLogin = useRef(false);
@@ -42,18 +46,10 @@ export function WaitlistDialog({ open, onOpenChange }: WaitlistDialogProps) {
     confettiRef.current = new JSConfetti();
   }, []);
 
-  // Get wallet address and email from Privy user
-  const walletAddress = user?.wallet?.address || '';
-  const userEmail = user?.email?.address || '';
+  // Get wallet address
+  const walletAddress = address || '';
 
-  // Auto-fill email if user is authenticated via email
-  useEffect(() => {
-    if (userEmail && !email) {
-      setEmail(userEmail);
-    }
-  }, [userEmail, email]);
-
-  // Reopen dialog after successful login
+  // Reopen dialog after successful wallet connection
   useEffect(() => {
     if (walletAddress && shouldReopenAfterLogin.current) {
       shouldReopenAfterLogin.current = false;
@@ -64,13 +60,13 @@ export function WaitlistDialog({ open, onOpenChange }: WaitlistDialogProps) {
   const handleConnectWallet = async () => {
     // Mark that we should reopen after login
     shouldReopenAfterLogin.current = true;
-    // Close the dialog before opening Privy login
+    // Close the dialog before opening wallet modal
     onOpenChange(false);
-    login();
+    openModal();
   };
 
   const handleDisconnectWallet = async () => {
-    await logout();
+    disconnect();
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -84,11 +80,17 @@ export function WaitlistDialog({ open, onOpenChange }: WaitlistDialogProps) {
     setIsSubmitting(true);
 
     try {
-      // Get Privy access token for authentication
-      const privyToken = await getAccessToken();
+      // Create a message for the user to sign
+      const timestamp = Date.now();
+      const message = `Sign this message to join the Tangerine waitlist.\n\nWallet: ${walletAddress}\nTimestamp: ${timestamp}`;
 
-      if (!privyToken) {
-        toast.error('Authentication failed. Please try logging in again.');
+      // Request signature from user
+      let signature: string;
+      try {
+        signature = await signMessageAsync({ message });
+      } catch (signError) {
+        console.error('Signature error:', signError);
+        toast.error('Signature rejected. Please sign the message to continue.');
         setIsSubmitting(false);
         return;
       }
@@ -102,7 +104,9 @@ export function WaitlistDialog({ open, onOpenChange }: WaitlistDialogProps) {
         body: JSON.stringify({
           walletAddress,
           email: email || undefined,
-          privyToken,
+          message,
+          signature,
+          timestamp,
         }),
       });
 
@@ -176,27 +180,13 @@ export function WaitlistDialog({ open, onOpenChange }: WaitlistDialogProps) {
         <Label htmlFor="email">
           Email <span className="text-muted-foreground">(optional)</span>
         </Label>
-        <div className="space-y-2">
-          <Input
-            id="email"
-            type="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            placeholder="your@email.com"
-            disabled={!!userEmail}
-            className={userEmail ? 'bg-muted' : ''}
-          />
-          {userEmail && (
-            <Button
-              type="button"
-              onClick={handleDisconnectWallet}
-              className="w-full cursor-pointer"
-              variant="outline"
-            >
-              Logout
-            </Button>
-          )}
-        </div>
+        <Input
+          id="email"
+          type="email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          placeholder="your@email.com"
+        />
       </div>
 
       <Button

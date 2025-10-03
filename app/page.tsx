@@ -6,14 +6,16 @@ import TextRotate from '@/components/TextRotate';
 import FaultyTerminal from '@/components/FaultyTerminal';
 import { WaitlistDialog } from '@/components/WaitlistDialog';
 import { useIsMobile } from '@/hooks/useIsMobile';
-import { usePrivy } from '@privy-io/react-auth';
+import { useAppKit } from '@reown/appkit/react';
+import { useAccount } from 'wagmi';
 import { Button } from '@/components/ui/button';
 
 export default function Home() {
   const isMobile = useIsMobile();
   const [waitlistOpen, setWaitlistOpen] = useState(false);
-  const { login, logout, user } = usePrivy();
-  const walletAddress = user?.wallet?.address || '';
+  const { open } = useAppKit();
+  const { address, isConnected } = useAccount();
+  const walletAddress = address || '';
 
   return (
     <div className="relative w-screen h-screen overflow-hidden bg-background p-2">
@@ -30,23 +32,13 @@ export default function Home() {
             />
             <h1 className="sr-only">TANGERINE</h1>
           </div>
-          {walletAddress ? (
-            <Button
-              onClick={() => logout()}
-              variant="outline"
-              className="bg-white/10 border-white/20 text-white hover:bg-white/20"
-            >
-              {walletAddress.slice(0, 6)}...{walletAddress.slice(-4)}
-            </Button>
-          ) : (
-            <Button
-              onClick={() => login()}
-              variant="outline"
-              className="bg-white/10 border-white/20 text-white hover:bg-white/20"
-            >
-              Connect Wallet
-            </Button>
-          )}
+          <Button
+            onClick={() => open()}
+            variant="outline"
+            className="bg-white/10 border-white/20 text-white hover:bg-white/20 cursor-pointer"
+          >
+            {walletAddress ? `${walletAddress.slice(0, 6)}...${walletAddress.slice(-4)}` : 'Connect Wallet'}
+          </Button>
         </div>
       </nav>
 

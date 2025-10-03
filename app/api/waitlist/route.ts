@@ -1,24 +1,25 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { PrivyClient } from '@privy-io/server-auth';
 import { prisma } from '@/lib/prisma';
-import { isAddress } from 'viem';
+import { isAddress, verifyMessage } from 'viem';
 import { Prisma } from '@prisma/client';
 
 interface WaitlistRequestBody {
   walletAddress: string;
   email?: string;
-  privyToken: string;
+  message: string;
+  signature: `0x${string}`;
+  timestamp: number;
 }
 
 export async function POST(request: NextRequest) {
   try {
     const body = (await request.json()) as WaitlistRequestBody;
-    const { walletAddress, email, privyToken } = body;
+    const { walletAddress, email, message, signature, timestamp } = body;
 
     // Validate required fields
-    if (!walletAddress || !privyToken) {
+    if (!walletAddress || !message || !signature || !timestamp) {
       return NextResponse.json(
-        { error: 'Wallet address and authentication token are required' },
+        { error: 'Wallet address, message, signature, and timestamp are required' },
         { status: 400 }
       );
     }
@@ -31,57 +32,36 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Verify Privy authentication token
-    const privyAppId = process.env.NEXT_PUBLIC_PRIVY_APP_ID;
-    const privyAppSecret = process.env.PRIVY_APP_SECRET;
-
-    if (!privyAppId || !privyAppSecret) {
-      console.error('Privy credentials not configured');
+    // Check timestamp is not too old (max 5 minutes)
+    const currentTime = Date.now();
+    const maxAge = 5 * 60 * 1000; // 5 minutes in milliseconds
+    if (currentTime - timestamp > maxAge) {
       return NextResponse.json(
-        { error: 'Server configuration error' },
-        { status: 500 }
+        { error: 'Signature expired. Please try again.' },
+        { status: 401 }
       );
     }
 
-    // Initialize Privy client
-    const privy = new PrivyClient(privyAppId, privyAppSecret);
-
-    // Verify the token and get user data
+    // Verify the signature
     try {
-      const claims = await privy.verifyAuthToken(privyToken);
+      const isValid = await verifyMessage({
+        address: walletAddress as `0x${string}`,
+        message,
+        signature,
+      });
 
-      // Get user data from Privy
-      const user = await privy.getUser(claims.userId);
-
-      // Verify the wallet address matches the authenticated user
-      const userWallets = user.linkedAccounts.filter(
-        (account) => account.type === 'wallet'
-      );
-
-      const walletMatches = userWallets.some(
-        (wallet) =>
-          'address' in wallet &&
-          wallet.address.toLowerCase() === walletAddress.toLowerCase()
-      );
-
-      if (!walletMatches) {
-        console.error('Wallet verification failed:', {
-          requestedWallet: walletAddress,
-          userWallets: userWallets
-            .filter((w) => 'address' in w)
-            .map((w) => 'address' in w ? w.address : null),
-        });
+      if (!isValid) {
         return NextResponse.json(
-          { error: 'Wallet address does not match authenticated user' },
-          { status: 403 }
+          { error: 'Invalid signature' },
+          { status: 401 }
         );
       }
 
-      console.log('User authenticated successfully with wallet:', walletAddress);
+      console.log('Signature verified successfully for wallet:', walletAddress);
     } catch (verifyError) {
-      console.error('Token verification error:', verifyError);
+      console.error('Signature verification error:', verifyError);
       return NextResponse.json(
-        { error: 'Invalid authentication token' },
+        { error: 'Invalid signature' },
         { status: 401 }
       );
     }
