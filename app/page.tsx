@@ -18,7 +18,7 @@ export default function Home() {
     <div className="relative w-screen h-screen overflow-hidden bg-background p-2">
       {/* Glassmorphic Navbar */}
       <nav className="fixed top-6 left-1/2 -translate-x-1/2 z-50 pointer-events-auto max-w-4xl w-full px-2">
-        <div className="backdrop-blur-md bg-black/40 border border-white/10 rounded-full px-8 py-4 shadow-2xl flex items-center justify-between">
+        <div className="backdrop-blur-[10px] bg-white/5 border border-white/20 rounded-[50px] px-8 py-4 shadow-[0_4px_30px_rgba(0,0,0,0.1)] flex items-center justify-between">
           <h1 className="text-xl font-bold tracking-tight text-white">
             TANGERINE
           </h1>
@@ -73,16 +73,20 @@ export default function Home() {
           pageLoadAnimation={false}
           brightness={1.2}
         />
+        {/* Dark overlay */}
+        <div className="absolute inset-0 bg-black/20 pointer-events-none" />
       </div>
 
       {/* Content */}
       <div className="relative z-10 flex flex-col items-center justify-center w-screen h-screen px-6 text-center pointer-events-none">
         <div className="max-w-4xl mx-auto space-y-8">
           {/* Headline */}
-          <h2 className="text-5xl sm:text-6xl md:text-7xl font-bold tracking-tight text-white">
+          <h2 className="text-5xl sm:text-6xl md:text-7xl font-bold tracking-tight text-white/80">
             Perp DEX
             <br />
-            <span className="text-6xl sm:text-8xl font-bold">Aggregator</span>
+            <span className="inline-block text-6xl sm:text-8xl font-bold backdrop-blur-[10px] bg-white/5 border border-white/20 rounded-[50px] px-8 py-4 shadow-[0_4px_30px_rgba(0,0,0,0.1)] mt-4 text-white">
+              Aggregator
+            </span>
           </h2>
 
           <p className="text-lg sm:text-xl md:text-2xl text-white/80 max-w-2xl mx-auto font-semibold">
@@ -98,7 +102,7 @@ export default function Home() {
           <div className="pt-6 pointer-events-auto">
             <button
               onClick={() => setWaitlistOpen(true)}
-              className="group relative inline-flex items-center cursor-pointer justify-center px-8 py-4 text-lg font-semibold text-black bg-white rounded-full hover:bg-white/90 transition-all duration-200 shadow-lg hover:shadow-xl hover:scale-105"
+              className="group relative inline-flex items-center cursor-pointer justify-center px-8 py-4 text-lg font-semibold text-black bg-white rounded-full transition-all duration-200 shadow-lg hover:shadow-xl"
             >
               Join Waitlist
               <svg
