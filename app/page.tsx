@@ -71,7 +71,7 @@ export default function Home() {
           scanlineIntensity={0.3}
           glitchAmount={isMobile ? 0.8 : 0.5}
           flickerAmount={0.3}
-          noiseAmp={0.5}
+          noiseAmp={0.4}
           chromaticAberration={0}
           dither={0}
           curvature={0.24}
@@ -92,7 +92,7 @@ export default function Home() {
           <h2 className="text-5xl sm:text-6xl md:text-7xl font-bold tracking-tight text-white/80">
             Perp DEX
             <br />
-            <span className="inline-block text-6xl sm:text-8xl font-bold backdrop-blur-[10px] bg-white/5 border border-white/20 rounded-[50px] px-8 py-4 shadow-[0_4px_30px_rgba(0,0,0,0.1)] mt-4 text-white">
+            <span className="inline-block text-6xl sm:text-8xl font-bold backdrop-blur-[10px] bg-white/5 border border-white/20 rounded-[50px] px-8 py-4 shadow-[0_4px_30px_rgba(0,0,0,0.1)] mt-4 text-[#7316f9]">
               Aggregator
             </span>
           </h2>
