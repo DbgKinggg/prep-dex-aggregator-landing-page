@@ -5,6 +5,7 @@ import { headers } from "next/headers";
 import "./globals.css";
 import { ReownProvider } from "@/providers/ReownProvider";
 import { Toaster } from "sonner";
+import { Analytics } from '@vercel/analytics/next';
 
 export const metadata: Metadata = {
   title: "Tangerine - The Perp Dex Aggregator",
@@ -67,6 +68,7 @@ export default async function RootLayout({
           {children}
         </ReownProvider>
         <Toaster theme="dark" richColors closeButton position="top-center" />
+        <Analytics />
       </body>
     </html>
   );
