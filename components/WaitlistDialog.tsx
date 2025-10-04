@@ -33,7 +33,7 @@ interface WaitlistDialogProps {
 export function WaitlistDialog({ open, onOpenChange }: WaitlistDialogProps) {
   const isMobile = useIsMobile();
   const { open: openModal } = useAppKit();
-  const { address, isConnected } = useAppKitAccount();
+  const { address } = useAppKitAccount();
   const { disconnect } = useDisconnect();
   const { signMessageAsync } = useSignMessage();
   const [email, setEmail] = useState('');

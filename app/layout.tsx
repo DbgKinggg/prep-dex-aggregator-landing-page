@@ -7,8 +7,50 @@ import { ReownProvider } from "@/providers/ReownProvider";
 import { Toaster } from "sonner";
 
 export const metadata: Metadata = {
-  title: "Tangerine - Perp DEX Aggregator",
-  description: "Making perp trading as simple as swapping tokens.",
+  title: "Tangerine - The 1inch for Perp Trading",
+  description: "Perp DEX Aggregator - One interface for all perpetual DEXs. Trade perpetuals across multiple platforms with the best rates and liquidity.",
+  keywords: ["perp trading", "perpetual futures", "DEX aggregator", "crypto trading", "DeFi", "derivatives", "Arbitrum", "Ethereum"],
+  authors: [{ name: "Tangerine" }],
+  creator: "Tangerine",
+  publisher: "Tangerine",
+  metadataBase: new URL('https://tangerine.finance'),
+  alternates: {
+    canonical: '/',
+  },
+  openGraph: {
+    title: "Tangerine - The 1inch for Perp Trading",
+    description: "One interface for all perpetual DEXs. Turn market inefficiencies into profit opportunities.",
+    url: 'https://tangerine.finance',
+    siteName: 'Tangerine',
+    images: [
+      {
+        url: '/og-image.png',
+        width: 1200,
+        height: 630,
+        alt: 'Tangerine - Perp DEX Aggregator',
+      },
+    ],
+    locale: 'en_US',
+    type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: "Tangerine - The 1inch for Perp Trading",
+    description: "One interface for all perpetual DEXs. Turn market inefficiencies into profit opportunities.",
+    images: ['/og-image.png'],
+    creator: '@tangerine_fi',
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
+  },
 };
 
 export default async function RootLayout({
