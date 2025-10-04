@@ -23,10 +23,10 @@ export default function Home() {
         <div className="backdrop-blur-[10px] bg-white/5 border border-white/20 rounded-[50px] px-8 py-4 shadow-[0_4px_30px_rgba(0,0,0,0.1)] flex items-center justify-between">
           <div className="flex items-center">
             <Image
-              src="/logo-with-text-white.png"
+              src="/3d-logo-with-text-orange.png"
               alt="Tangerine"
-              width={160}
-              height={40}
+              width={200}
+              height={43}
               className="h-8 w-auto"
             />
             <h1 className="sr-only">TANGERINE</h1>
@@ -83,7 +83,7 @@ export default function Home() {
           <h2 className="text-5xl sm:text-6xl md:text-7xl font-bold tracking-tight text-white/80">
             Perp DEX
             <br />
-            <span className="inline-block text-6xl sm:text-8xl font-bold backdrop-blur-[10px] bg-white/5 border border-white/20 rounded-[50px] px-8 py-4 shadow-[0_4px_30px_rgba(0,0,0,0.1)] mt-4 text-[#7316f9]">
+            <span className="inline-block text-6xl sm:text-8xl font-bold backdrop-blur-[10px] bg-white/5 border border-white/20 rounded-[50px] px-8 py-4 shadow-[0_4px_30px_rgba(0,0,0,0.1)] mt-4 text-white">
               Aggregator
             </span>
           </h2>
