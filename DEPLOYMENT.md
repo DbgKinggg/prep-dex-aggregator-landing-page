@@ -22,10 +22,9 @@ NODE_ENV=production
    - Create a new project
    - Copy the connection string
 
-2. **Run Migrations:**
-   ```bash
-   pnpm db:push
-   ```
+2. **Database Schema:**
+   - Schema is automatically pushed during Vercel build via `vercel-build` script
+   - For local development, run: `pnpm db:push`
 
 3. **Verify Database:**
    ```bash

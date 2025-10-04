@@ -13,7 +13,7 @@ export default function Home() {
   const isMobile = useIsMobile();
   const [waitlistOpen, setWaitlistOpen] = useState(false);
   const { open } = useAppKit();
-  const { address, isConnected } = useAppKitAccount();
+  const { address } = useAppKitAccount();
   const walletAddress = address || '';
 
   return (
