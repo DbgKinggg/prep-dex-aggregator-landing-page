@@ -12,8 +12,8 @@ const queryClient = new QueryClient();
 const metadata = {
   name: 'Tangerine',
   description: 'The 1inch for Perp Trading',
-  url: 'https://tangerine.finance', // Update with your actual URL
-  icons: ['https://tangerine.finance/logo-orange.png'], // Update with your actual icon URL
+  url: 'https://tangerine.exchange',
+  icons: ['https://tangerine.exchange/logo-orange.png'],
 };
 
 // Create the AppKit modal with multi-chain support (EVM + Solana)

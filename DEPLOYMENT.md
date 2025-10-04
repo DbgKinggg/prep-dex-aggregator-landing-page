@@ -37,7 +37,7 @@ NODE_ENV=production
 2. Create a new project
 3. Add your domain to allowed domains:
    - Development: `localhost:3000`
-   - Production: `tangerine.finance`
+   - Production: `tangerine.exchange`
 4. Copy your Project ID to environment variables
 
 ## Vercel Deployment
@@ -72,8 +72,8 @@ NODE_ENV=production
 
 1. **Add Custom Domain:**
    - Go to Project Settings → Domains
-   - Add `tangerine.finance`
-   - Add `www.tangerine.finance` (redirect to main domain)
+   - Add `tangerine.exchange`
+   - Add `www.tangerine.exchange` (redirect to main domain)
 
 2. **Configure DNS:**
    Point your domain's A record to Vercel:
@@ -99,7 +99,7 @@ NODE_ENV=production
 ### Verify Deployment
 
 1. **Check Homepage:**
-   - Visit https://tangerine.finance
+   - Visit https://tangerine.exchange
    - Verify wallet connection works
    - Test waitlist submission
 
@@ -137,7 +137,7 @@ NODE_ENV=production
 
 1. **Submit Sitemap:**
    - Google Search Console: https://search.google.com/search-console
-   - Submit sitemap: `https://tangerine.finance/sitemap.xml`
+   - Submit sitemap: `https://tangerine.exchange/sitemap.xml`
 
 2. **Verify Ownership:**
    - Add Google Search Console verification

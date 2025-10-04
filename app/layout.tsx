@@ -7,20 +7,20 @@ import { ReownProvider } from "@/providers/ReownProvider";
 import { Toaster } from "sonner";
 
 export const metadata: Metadata = {
-  title: "Tangerine - The 1inch for Perp Trading",
-  description: "Perp DEX Aggregator - One interface for all perpetual DEXs. Trade perpetuals across multiple platforms with the best rates and liquidity.",
+  title: "Tangerine - The Perp Dex Aggregator",
+  description: "Perp DEX Aggregator - One interface for all perpetual DEXs.",
   keywords: ["perp trading", "perpetual futures", "DEX aggregator", "crypto trading", "DeFi", "derivatives", "Arbitrum", "Ethereum"],
   authors: [{ name: "Tangerine" }],
   creator: "Tangerine",
   publisher: "Tangerine",
-  metadataBase: new URL('https://tangerine.finance'),
+  metadataBase: new URL('https://tangerine.exchange'),
   alternates: {
     canonical: '/',
   },
   openGraph: {
-    title: "Tangerine - The 1inch for Perp Trading",
+    title: "Tangerine - The Perp Dex Aggregator",
     description: "One interface for all perpetual DEXs. Turn market inefficiencies into profit opportunities.",
-    url: 'https://tangerine.finance',
+    url: 'https://tangerine.exchange',
     siteName: 'Tangerine',
     images: [
       {

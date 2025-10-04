@@ -1,7 +1,7 @@
 import { MetadataRoute } from 'next';
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = 'https://tangerine.finance';
+  const baseUrl = 'https://tangerine.exchange';
 
   return [
     {
