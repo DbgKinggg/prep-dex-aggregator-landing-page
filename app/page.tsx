@@ -6,15 +6,14 @@ import TextRotate from '@/components/TextRotate';
 import FaultyTerminal from '@/components/FaultyTerminal';
 import { WaitlistDialog } from '@/components/WaitlistDialog';
 import { useIsMobile } from '@/hooks/useIsMobile';
-import { useAppKit } from '@reown/appkit/react';
-import { useAccount } from 'wagmi';
+import { useAppKit, useAppKitAccount } from '@reown/appkit/react';
 import { Button } from '@/components/ui/button';
 
 export default function Home() {
   const isMobile = useIsMobile();
   const [waitlistOpen, setWaitlistOpen] = useState(false);
   const { open } = useAppKit();
-  const { address, isConnected } = useAccount();
+  const { address, isConnected } = useAppKitAccount();
   const walletAddress = address || '';
 
   return (

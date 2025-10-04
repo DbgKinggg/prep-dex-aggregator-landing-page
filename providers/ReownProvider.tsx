@@ -1,9 +1,9 @@
 'use client';
 
-import { wagmiAdapter, projectId, networks } from '@/config';
+import { wagmiAdapter, solanaWeb3JsAdapter, projectId } from '@/config';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { createAppKit } from '@reown/appkit/react';
-import { arbitrum } from '@reown/appkit/networks';
+import { arbitrum, mainnet, bsc, solana } from '@reown/appkit/networks';
 import React, { type ReactNode } from 'react';
 import { cookieToInitialState, WagmiProvider, type Config } from 'wagmi';
 
@@ -16,12 +16,12 @@ const metadata = {
   icons: ['https://tangerine.finance/logo-orange.png'], // Update with your actual icon URL
 };
 
-// Create the AppKit modal
+// Create the AppKit modal with multi-chain support (EVM + Solana)
 if (projectId) {
   createAppKit({
-    adapters: [wagmiAdapter],
+    adapters: [wagmiAdapter, solanaWeb3JsAdapter],
     projectId,
-    networks: [arbitrum],
+    networks: [arbitrum, mainnet, bsc, solana],
     defaultNetwork: arbitrum,
     metadata,
     features: {

@@ -1,8 +1,8 @@
 'use client';
 
 import { useState, useEffect, useRef } from 'react';
-import { useAccount, useDisconnect, useSignMessage } from 'wagmi';
-import { useAppKit } from '@reown/appkit/react';
+import { useSignMessage } from 'wagmi';
+import { useAppKit, useAppKitAccount, useDisconnect } from '@reown/appkit/react';
 import { useIsMobile } from '@/hooks/useIsMobile';
 import { toast } from 'sonner';
 import JSConfetti from 'js-confetti';
@@ -33,7 +33,7 @@ interface WaitlistDialogProps {
 export function WaitlistDialog({ open, onOpenChange }: WaitlistDialogProps) {
   const isMobile = useIsMobile();
   const { open: openModal } = useAppKit();
-  const { address, isConnected } = useAccount();
+  const { address, isConnected } = useAppKitAccount();
   const { disconnect } = useDisconnect();
   const { signMessageAsync } = useSignMessage();
   const [email, setEmail] = useState('');
