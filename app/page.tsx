@@ -17,17 +17,17 @@ export default function Home() {
   const walletAddress = address || '';
 
   return (
-    <div className="relative w-screen h-screen overflow-hidden bg-background p-2">
+    <div className="relative w-full h-screen overflow-hidden bg-background">
       {/* Glassmorphic Navbar */}
-      <nav className="fixed top-6 left-1/2 -translate-x-1/2 z-50 pointer-events-auto max-w-4xl w-full px-2">
-        <div className="backdrop-blur-[10px] bg-white/5 border border-white/20 rounded-[50px] px-8 py-4 shadow-[0_4px_30px_rgba(0,0,0,0.1)] flex items-center justify-between">
+      <nav className="fixed top-4 sm:top-6 left-1/2 -translate-x-1/2 z-50 pointer-events-auto max-w-4xl w-[calc(100%-1rem)] sm:w-full px-2">
+        <div className="backdrop-blur-[10px] bg-white/5 border border-white/20 rounded-[50px] px-3 sm:px-8 py-3 sm:py-4 shadow-[0_4px_30px_rgba(0,0,0,0.1)] flex items-center justify-between">
           <div className="flex items-center">
             <Image
               src="/3d-logo-with-text-orange.png"
               alt="Tangerine"
-              width={isMobile ? 150 : 200}
-              height={isMobile ? 32 : 43}
-              className="h-8 w-auto"
+              width={isMobile ? 100 : 140}
+              height={isMobile ? 21 : 30}
+              className="h-6 sm:h-7 w-auto"
             />
             <h1 className="sr-only">TANGERINE</h1>
           </div>
@@ -77,18 +77,18 @@ export default function Home() {
       </div>
 
       {/* Content */}
-      <div className="relative z-10 flex flex-col items-center justify-center w-screen h-screen px-6 text-center pointer-events-none">
-        <div className="max-w-4xl mx-auto space-y-8">
+      <div className="relative z-10 flex flex-col items-center justify-center w-full h-screen px-4 sm:px-6 text-center">
+        <div className="max-w-4xl mx-auto space-y-6 sm:space-y-8">
           {/* Headline */}
-          <h2 className="text-4xl sm:text-6xl md:text-7xl font-bold tracking-tight text-white/80">
+          <h2 className="text-3xl sm:text-6xl md:text-7xl font-bold tracking-tight text-white/80 pointer-events-none">
             Perp DEX
             <br />
-            <span className="inline-block text-5xl sm:text-8xl font-bold backdrop-blur-[10px] bg-white/5 border border-white/20 rounded-[50px] px-8 py-4 shadow-[0_4px_30px_rgba(0,0,0,0.1)] mt-4 text-white">
+            <span className="inline-block text-4xl sm:text-8xl font-bold backdrop-blur-[10px] bg-white/5 border border-white/20 rounded-[50px] px-4 sm:px-8 py-3 sm:py-4 shadow-[0_4px_30px_rgba(0,0,0,0.1)] mt-3 sm:mt-4 text-white">
               Aggregator
             </span>
           </h2>
 
-          <div className="text-lg sm:text-xl md:text-2xl text-white/80 max-w-2xl mx-auto font-semibold h-24 sm:h-20 flex items-center justify-center">
+          <div className="text-base sm:text-xl md:text-2xl text-white max-w-2xl mx-auto font-semibold h-20 sm:h-20 flex items-center justify-center px-6 sm:px-8 pointer-events-none">
             <TextRotate
               texts={[
                 'The 1inch for Perp Trading',
@@ -100,10 +100,10 @@ export default function Home() {
             />
           </div>
 
-          <div className="pt-6 pointer-events-auto">
+          <div className="pt-4 sm:pt-6 pointer-events-auto">
             <button
               onClick={() => setWaitlistOpen(true)}
-              className="group relative inline-flex items-center cursor-pointer justify-center px-8 py-4 text-lg font-semibold text-black bg-white rounded-full transition-all duration-200 shadow-lg hover:shadow-xl"
+              className="group relative inline-flex items-center cursor-pointer justify-center px-6 sm:px-8 py-3 sm:py-4 text-base sm:text-lg font-semibold text-black bg-white rounded-full transition-all duration-200 shadow-lg hover:shadow-xl"
             >
               Join Waitlist
               <svg
