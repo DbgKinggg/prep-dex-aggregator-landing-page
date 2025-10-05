@@ -25,8 +25,8 @@ export default function Home() {
             <Image
               src="/3d-logo-with-text-orange.png"
               alt="Tangerine"
-              width={200}
-              height={43}
+              width={isMobile ? 150 : 200}
+              height={isMobile ? 32 : 43}
               className="h-8 w-auto"
             />
             <h1 className="sr-only">TANGERINE</h1>
@@ -34,7 +34,7 @@ export default function Home() {
           <Button
             onClick={() => open()}
             variant="outline"
-            className="bg-white/10 border-white/20 text-white hover:bg-white/20 cursor-pointer"
+            className="bg-white/10 border-white/20 text-white hover:bg-white/20 cursor-pointer text-xs sm:text-base"
           >
             {walletAddress ? `${walletAddress.slice(0, 6)}...${walletAddress.slice(-4)}` : 'Connect Wallet'}
           </Button>
@@ -80,10 +80,10 @@ export default function Home() {
       <div className="relative z-10 flex flex-col items-center justify-center w-screen h-screen px-6 text-center pointer-events-none">
         <div className="max-w-4xl mx-auto space-y-8">
           {/* Headline */}
-          <h2 className="text-5xl sm:text-6xl md:text-7xl font-bold tracking-tight text-white/80">
+          <h2 className="text-4xl sm:text-6xl md:text-7xl font-bold tracking-tight text-white/80">
             Perp DEX
             <br />
-            <span className="inline-block text-6xl sm:text-8xl font-bold backdrop-blur-[10px] bg-white/5 border border-white/20 rounded-[50px] px-8 py-4 shadow-[0_4px_30px_rgba(0,0,0,0.1)] mt-4 text-white">
+            <span className="inline-block text-5xl sm:text-8xl font-bold backdrop-blur-[10px] bg-white/5 border border-white/20 rounded-[50px] px-8 py-4 shadow-[0_4px_30px_rgba(0,0,0,0.1)] mt-4 text-white">
               Aggregator
             </span>
           </h2>
