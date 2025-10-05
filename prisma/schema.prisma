@@ -12,7 +12,7 @@ datasource db {
 
 model Waitlist {
   id           Int      @id @default(autoincrement())
-  walletAddress String   @unique @map("wallet_address") @db.VarChar(42)
+  walletAddress String   @unique @map("wallet_address") @db.VarChar(64)
   email        String?  @db.VarChar(255)
   ip           String   @db.VarChar(45)
   userAgent    String   @map("user_agent") @db.VarChar(512)

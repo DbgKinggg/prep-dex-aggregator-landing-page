@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useRef } from 'react';
 import { useSignMessage } from 'wagmi';
-import { useAppKit, useAppKitAccount, useDisconnect } from '@reown/appkit/react';
+import { useAppKit, useAppKitAccount, useDisconnect, useAppKitProvider } from '@reown/appkit/react';
 import { useIsMobile } from '@/hooks/useIsMobile';
 import { toast } from 'sonner';
 import JSConfetti from 'js-confetti';
@@ -30,10 +30,15 @@ interface WaitlistDialogProps {
   onOpenChange: (open: boolean) => void;
 }
 
+interface SolanaProvider {
+  signMessage: (message: Uint8Array) => Promise<Uint8Array>;
+}
+
 export function WaitlistDialog({ open, onOpenChange }: WaitlistDialogProps) {
   const isMobile = useIsMobile();
   const { open: openModal } = useAppKit();
-  const { address } = useAppKitAccount();
+  const { address, caipAddress } = useAppKitAccount();
+  const { walletProvider: solanaProvider } = useAppKitProvider('solana');
   const { disconnect } = useDisconnect();
   const { signMessageAsync } = useSignMessage();
   const [email, setEmail] = useState('');
@@ -84,10 +89,24 @@ export function WaitlistDialog({ open, onOpenChange }: WaitlistDialogProps) {
       const timestamp = Date.now();
       const message = `Sign this message to join the Tangerine waitlist.\n\nWallet: ${walletAddress}\nTimestamp: ${timestamp}`;
 
+      // Detect wallet type from CAIP address
+      const isSolana = caipAddress?.startsWith('solana:');
+
       // Request signature from user
       let signature: string;
       try {
-        signature = await signMessageAsync({ message });
+        if (isSolana && solanaProvider) {
+          // Solana wallet signing
+          const provider = solanaProvider as unknown as SolanaProvider;
+          const encodedMessage = new TextEncoder().encode(message);
+          const signedMessage = await provider.signMessage(encodedMessage);
+          // Convert Uint8Array signature to base58 string
+          const bs58 = await import('bs58');
+          signature = bs58.default.encode(signedMessage);
+        } else {
+          // EVM wallet signing
+          signature = await signMessageAsync({ message });
+        }
       } catch (signError) {
         console.error('Signature error:', signError);
         toast.error('Signature rejected. Please sign the message to continue.');

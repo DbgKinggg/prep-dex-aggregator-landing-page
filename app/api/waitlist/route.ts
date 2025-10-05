@@ -2,12 +2,15 @@ import { NextRequest, NextResponse } from 'next/server';
 import { prisma } from '@/lib/prisma';
 import { isAddress, verifyMessage } from 'viem';
 import { Prisma } from '@prisma/client';
+import { PublicKey } from '@solana/web3.js';
+import nacl from 'tweetnacl';
+import bs58 from 'bs58';
 
 interface WaitlistRequestBody {
   walletAddress: string;
   email?: string;
   message: string;
-  signature: `0x${string}`;
+  signature: string;
   timestamp: number;
 }
 
@@ -24,12 +27,28 @@ export async function POST(request: NextRequest) {
       );
     }
 
+    // Detect wallet type - Solana addresses are base58 and typically 32-44 chars
+    const isSolana = !walletAddress.startsWith('0x');
+
     // Validate wallet address format
-    if (!isAddress(walletAddress)) {
-      return NextResponse.json(
-        { error: 'Invalid wallet address format' },
-        { status: 400 }
-      );
+    if (isSolana) {
+      // Validate Solana address
+      try {
+        new PublicKey(walletAddress);
+      } catch {
+        return NextResponse.json(
+          { error: 'Invalid Solana wallet address format' },
+          { status: 400 }
+        );
+      }
+    } else {
+      // Validate EVM address
+      if (!isAddress(walletAddress)) {
+        return NextResponse.json(
+          { error: 'Invalid EVM wallet address format' },
+          { status: 400 }
+        );
+      }
     }
 
     // Check timestamp is not too old (max 5 minutes)
@@ -44,11 +63,27 @@ export async function POST(request: NextRequest) {
 
     // Verify the signature
     try {
-      const isValid = await verifyMessage({
-        address: walletAddress as `0x${string}`,
-        message,
-        signature,
-      });
+      let isValid = false;
+
+      if (isSolana) {
+        // Solana signature verification
+        const publicKey = new PublicKey(walletAddress);
+        const messageBytes = new TextEncoder().encode(message);
+        const signatureBytes = bs58.decode(signature);
+
+        isValid = nacl.sign.detached.verify(
+          messageBytes,
+          signatureBytes,
+          publicKey.toBytes()
+        );
+      } else {
+        // EVM signature verification
+        isValid = await verifyMessage({
+          address: walletAddress as `0x${string}`,
+          message,
+          signature: signature as `0x${string}`,
+        });
+      }
 
       if (!isValid) {
         return NextResponse.json(
@@ -85,7 +120,8 @@ export async function POST(request: NextRequest) {
     try {
       const result = await prisma.waitlist.create({
         data: {
-          walletAddress: walletAddress.toLowerCase(),
+          // Only lowercase EVM addresses; Solana addresses are case-sensitive
+          walletAddress: isSolana ? walletAddress : walletAddress.toLowerCase(),
           email: email || null,
           ip,
           userAgent,
