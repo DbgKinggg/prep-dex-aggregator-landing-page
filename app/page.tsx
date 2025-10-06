@@ -2,8 +2,6 @@
 
 import { useState } from 'react';
 import Image from 'next/image';
-import TextRotate from '@/components/TextRotate';
-import FaultyTerminal from '@/components/FaultyTerminal';
 import { WaitlistDialog } from '@/components/WaitlistDialog';
 import { useIsMobile } from '@/hooks/useIsMobile';
 import { useAppKit, useAppKitAccount } from '@reown/appkit/react';
@@ -17,10 +15,30 @@ export default function Home() {
   const walletAddress = address || '';
 
   return (
-    <div className="relative w-full h-screen overflow-hidden bg-background">
-      {/* Glassmorphic Navbar */}
-      <nav className="fixed top-4 sm:top-6 left-1/2 -translate-x-1/2 z-50 pointer-events-auto max-w-4xl w-[calc(100%-1rem)] sm:w-full px-2">
-        <div className="backdrop-blur-[10px] bg-white/5 border border-white/20 rounded-[50px] px-3 sm:px-8 py-3 sm:py-4 shadow-[0_4px_30px_rgba(0,0,0,0.1)] flex items-center justify-between">
+    <div className="relative w-full min-h-screen overflow-hidden">
+      {/* Gradient Background */}
+      <div className="absolute inset-0 bg-gradient-to-br from-[#1a1410] via-[#2d1810] to-[#1a0f0a]">
+        {/* Animated particles/stars effect */}
+        <div className="absolute inset-0 opacity-30">
+          {[...Array(50)].map((_, i) => (
+            <div
+              key={i}
+              className="absolute w-1 h-1 bg-orange-400/40 rounded-full animate-pulse"
+              style={{
+                top: `${Math.random() * 100}%`,
+                left: `${Math.random() * 100}%`,
+                animationDelay: `${Math.random() * 3}s`,
+                animationDuration: `${2 + Math.random() * 3}s`,
+              }}
+            />
+          ))}
+        </div>
+      </div>
+
+      {/* Navbar */}
+      <nav className="relative z-50 w-full px-4 sm:px-8 py-6">
+        <div className="max-w-7xl mx-auto flex items-center justify-between">
+          {/* Logo */}
           <div className="flex items-center">
             <Image
               src="/3d-logo-with-text-orange.png"
@@ -31,81 +49,41 @@ export default function Home() {
             />
             <h1 className="sr-only">TANGERINE</h1>
           </div>
+
+          {/* Connect Wallet Button */}
           <Button
             onClick={() => open()}
             variant="outline"
-            className="bg-white/10 border-white/20 text-white hover:bg-white/20 cursor-pointer text-xs sm:text-base"
+            className="bg-white/10 border-white/20 text-white hover:bg-white/20 cursor-pointer text-xs sm:text-base rounded-full px-4 sm:px-6 py-2 sm:py-2.5 backdrop-blur-sm transition-all"
           >
             {walletAddress ? `${walletAddress.slice(0, 6)}...${walletAddress.slice(-4)}` : 'Connect Wallet'}
           </Button>
         </div>
       </nav>
 
-      {/* FaultyTerminal Background */}
-      <div
-        className="fixed inset-0"
-        style={{
-          zIndex: 0,
-          width: '100vw',
-          height: '100vh',
-          position: 'fixed',
-          top: 0,
-          left: 0
-        }}
-      >
-        <FaultyTerminal
-          scale={isMobile ? 1 : 1.5}
-          gridMul={[2, 1]}
-          digitSize={1.2}
-          timeScale={1}
-          pause={false}
-          scanlineIntensity={0.3}
-          glitchAmount={isMobile ? 0.8 : 0.5}
-          flickerAmount={0.3}
-          noiseAmp={0.4}
-          chromaticAberration={0}
-          dither={0}
-          curvature={0.24}
-          tint="#ff7c3a"
-          mouseReact={true}
-          mouseStrength={0.1}
-          pageLoadAnimation={false}
-          brightness={1.2}
-        />
-        {/* Dark overlay */}
-        <div className="absolute inset-0 bg-black/10 pointer-events-none" />
-      </div>
-
-      {/* Content */}
-      <div className="relative z-10 flex flex-col items-center justify-center w-full h-screen px-4 sm:px-6 text-center">
-        <div className="max-w-4xl mx-auto space-y-6 sm:space-y-8">
-          {/* Headline */}
-          <h2 className="text-3xl sm:text-6xl md:text-7xl font-bold tracking-tight text-white/80 pointer-events-none">
-            Perp DEX
+      {/* Main Content */}
+      <div className="relative z-10 flex flex-col items-center justify-center min-h-[calc(100vh-100px)] px-4 sm:px-6 text-center">
+        <div className="max-w-5xl mx-auto space-y-8 sm:space-y-12">
+          {/* Main Headline */}
+          <h2 className="text-5xl sm:text-7xl md:text-8xl font-bold tracking-tight text-white leading-tight">
+            Perp trading
             <br />
-            <span className="inline-block text-4xl sm:text-8xl font-bold backdrop-blur-[10px] bg-white/5 border border-white/20 rounded-[50px] px-4 sm:px-8 py-3 sm:py-4 shadow-[0_4px_30px_rgba(0,0,0,0.1)] mt-3 sm:mt-4 text-white">
-              Aggregator
-            </span>
+            made easy
           </h2>
 
-          <div className="text-base sm:text-xl md:text-2xl text-white max-w-2xl mx-auto font-semibold h-20 sm:h-20 flex items-center justify-center px-6 sm:px-8 pointer-events-none">
-            <TextRotate
-              texts={[
-                'The 1inch for Perp Trading',
-                'One interface. All perp DEXs',
-                "Perp trading doesn't have to be rocket science",
-                'Turn market inefficiencies into profit opportunities',
-              ]}
-              rotationInterval={3000}
-            />
-          </div>
+          {/* Secondary Tagline */}
+          <p className="text-lg sm:text-xl md:text-2xl text-white/70 max-w-3xl mx-auto font-medium">
+            Trade and manage Perp Trading across 10+ Perp DEXs.
+          </p>
 
-          <div className="pt-4 sm:pt-6 pointer-events-auto">
+          {/* CTA Buttons */}
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6 pt-8">
+            {/* Join Early Access Button */}
             <button
               onClick={() => setWaitlistOpen(true)}
-              className="group relative inline-flex items-center cursor-pointer justify-center px-6 sm:px-8 py-3 sm:py-4 text-base sm:text-lg font-semibold text-black bg-white rounded-full transition-all duration-200 shadow-lg hover:shadow-xl"
+              className="group relative inline-flex items-center justify-center px-8 py-4 text-base sm:text-lg font-semibold text-black bg-white rounded-full transition-all duration-200 shadow-lg hover:shadow-xl hover:scale-105 cursor-pointer"
             >
-              Join Waitlist
+              Join Early Access
               <svg
                 className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform duration-200"
                 fill="none"
@@ -120,6 +98,53 @@ export default function Home() {
                 />
               </svg>
             </button>
+
+            {/* Launch App Button (Disabled) */}
+            <div className="relative">
+              <button
+                disabled
+                className="inline-flex items-center justify-center px-8 py-4 text-base sm:text-lg font-semibold text-white/40 bg-white/10 border border-white/20 rounded-full cursor-not-allowed backdrop-blur-sm"
+              >
+                Launch App
+              </button>
+              {/* Coming Soon Tag */}
+              <span className="absolute -top-2 -right-2 px-3 py-1 text-xs font-bold text-black bg-orange-400 rounded-full shadow-lg">
+                Coming Soon
+              </span>
+            </div>
+          </div>
+
+          {/* Feature highlights - optional section */}
+          <div className="pt-16 sm:pt-24 grid grid-cols-1 sm:grid-cols-3 gap-8 max-w-4xl mx-auto">
+            <div className="space-y-3">
+              <div className="w-12 h-12 mx-auto rounded-full border border-white/20 flex items-center justify-center">
+                <svg className="w-6 h-6 text-orange-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+                </svg>
+              </div>
+              <h3 className="text-lg font-semibold text-white">Best Execution</h3>
+              <p className="text-sm text-white/60">Get the best prices across all major Perp DEXs</p>
+            </div>
+
+            <div className="space-y-3">
+              <div className="w-12 h-12 mx-auto rounded-full border border-white/20 flex items-center justify-center">
+                <svg className="w-6 h-6 text-orange-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                </svg>
+              </div>
+              <h3 className="text-lg font-semibold text-white">Unified Interface</h3>
+              <p className="text-sm text-white/60">One platform to manage all your positions</p>
+            </div>
+
+            <div className="space-y-3">
+              <div className="w-12 h-12 mx-auto rounded-full border border-white/20 flex items-center justify-center">
+                <svg className="w-6 h-6 text-orange-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+                </svg>
+              </div>
+              <h3 className="text-lg font-semibold text-white">Smart Routing</h3>
+              <p className="text-sm text-white/60">Automatically find the most efficient routes</p>
+            </div>
           </div>
         </div>
       </div>
