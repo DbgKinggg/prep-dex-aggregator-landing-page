@@ -16,25 +16,6 @@ export default function Home() {
 
   return (
     <div className="relative w-full min-h-screen overflow-hidden">
-      {/* Gradient Background */}
-      <div className="absolute inset-0 bg-gradient-to-br from-[#1a1410] via-[#2d1810] to-[#1a0f0a]">
-        {/* Animated particles/stars effect */}
-        <div className="absolute inset-0 opacity-30">
-          {[...Array(50)].map((_, i) => (
-            <div
-              key={i}
-              className="absolute w-1 h-1 bg-orange-400/40 rounded-full animate-pulse"
-              style={{
-                top: `${Math.random() * 100}%`,
-                left: `${Math.random() * 100}%`,
-                animationDelay: `${Math.random() * 3}s`,
-                animationDuration: `${2 + Math.random() * 3}s`,
-              }}
-            />
-          ))}
-        </div>
-      </div>
-
       {/* Navbar */}
       <nav className="relative z-50 w-full px-4 sm:px-8 py-6">
         <div className="max-w-7xl mx-auto flex items-center justify-between">
@@ -62,18 +43,22 @@ export default function Home() {
       </nav>
 
       {/* Main Content */}
-      <div className="relative z-10 flex flex-col items-center justify-center min-h-[calc(100vh-100px)] px-4 sm:px-6 text-center">
-        <div className="max-w-5xl mx-auto space-y-8 sm:space-y-12">
+      <div className="relative z-10 flex flex-col items-center justify-center min-h-[calc(100vh-100px)] px-4 sm:px-6 text-center mx-2 md:mx-4 rounded-4xl"
+        style={{
+          background: "radial-gradient(200% 184% at 50% 5%,var(--token-0d9b717a-2449-4354-bde9-4e406668174b, #000000) 31.306306306306297%,var(--token-bcb4b7ca-f1d2-4fcd-a692-7f500cce537b, #f97316) 47.50197072072073%,var(--token-e0feb305-cb1f-4bbf-ad55-3fa715937606, #fa9d5b) 58.40019707207207%,rgb(255,255,255) 85.76506193693693%)"
+        }}
+      >
+        <div className="max-w-5xl mx-auto space-y-2 sm:space-y-4">
           {/* Main Headline */}
-          <h2 className="text-5xl sm:text-7xl md:text-8xl font-bold tracking-tight text-white leading-tight">
+          <h2 className="text-5xl sm:text-7xl md:text-7xl font-bold tracking-tight text-white leading-tight">
             Perp trading
             <br />
             made easy
           </h2>
 
           {/* Secondary Tagline */}
-          <p className="text-lg sm:text-xl md:text-2xl text-white/70 max-w-3xl mx-auto font-medium">
-            Trade and manage Perp Trading across 10+ Perp DEXs.
+          <p className="text-lg sm:text-xl md:text-xl text-white/70 max-w-3xl mx-auto font-medium">
+            Trade and manage Perp Trading across Hyperliquid, Aster and more Perp DEXs.
           </p>
 
           {/* CTA Buttons */}
@@ -113,38 +98,27 @@ export default function Home() {
               </span>
             </div>
           </div>
-
-          {/* Feature highlights - optional section */}
-          <div className="pt-16 sm:pt-24 grid grid-cols-1 sm:grid-cols-3 gap-8 max-w-4xl mx-auto">
-            <div className="space-y-3">
-              <div className="w-12 h-12 mx-auto rounded-full border border-white/20 flex items-center justify-center">
-                <svg className="w-6 h-6 text-orange-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
-                </svg>
-              </div>
-              <h3 className="text-lg font-semibold text-white">Best Execution</h3>
-              <p className="text-sm text-white/60">Get the best prices across all major Perp DEXs</p>
+        </div>
+      </div>
+      <div className="min-h-screen px-4 sm:px-6 py-10 sm:py-20">
+        <h2 className="font-bold text-3xl sm:text-5xl">
+          Your Perp trading<br />starts right here
+        </h2>
+        <div className="mt-10 md:mt-20">
+          <div className="p-4 sm:p-6 sm:mx-20 flex flex-col sm:flex-row items-center">
+            <div className="flex space-y-2 sm:space-y-4 flex-col sm:w-1/2">
+              <label className='text-primary font-semibold'>Connect</label>
+              <h3 className="font-bold text-2xl sm:text-4xl">All portfolio in one</h3>
+              <p className="text-lg sm:text-xl md:text-xl text-white/70 max-w-3xl mx-auto font-medium">
+                Manage all your Perp positions, orders and trading history in one place.
+              </p>
             </div>
-
-            <div className="space-y-3">
-              <div className="w-12 h-12 mx-auto rounded-full border border-white/20 flex items-center justify-center">
-                <svg className="w-6 h-6 text-orange-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
-                </svg>
-              </div>
-              <h3 className="text-lg font-semibold text-white">Unified Interface</h3>
-              <p className="text-sm text-white/60">One platform to manage all your positions</p>
-            </div>
-
-            <div className="space-y-3">
-              <div className="w-12 h-12 mx-auto rounded-full border border-white/20 flex items-center justify-center">
-                <svg className="w-6 h-6 text-orange-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
-                </svg>
-              </div>
-              <h3 className="text-lg font-semibold text-white">Smart Routing</h3>
-              <p className="text-sm text-white/60">Automatically find the most efficient routes</p>
-            </div>
+            <Image
+              src="/images/cubes.png"
+              alt='Cubes'
+              width={350}
+              height={350}
+            />
           </div>
         </div>
       </div>
