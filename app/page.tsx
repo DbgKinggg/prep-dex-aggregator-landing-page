@@ -27,7 +27,7 @@ export default function Home() {
   ]
 
   return (
-    <div className="relative w-full min-h-screen overflow-hidden">
+    <div className="relative w-full min-h-screen overflow-hidden bg-black">
       {/* Navbar */}
       <nav className="relative z-50 w-full px-4 sm:px-8 py-6">
         <div className="max-w-7xl mx-auto flex items-center justify-between">
@@ -210,7 +210,7 @@ export default function Home() {
           </p>
           <div className="mt-10 grid grid-cols-1 gap-4 sm:mt-16 lg:grid-cols-6 lg:grid-rows-2">
             <div className="flex p-px lg:col-span-4">
-              <div className="w-full overflow-hidden rounded-lg bg-white shadow-sm outline outline-black/5 max-lg:rounded-t-4xl lg:rounded-tl-4xl dark:bg-gray-800 dark:shadow-none dark:outline-white/15">
+              <div className="w-full overflow-hidden rounded-lg shadow-sm outline outline-black/5 max-lg:rounded-t-4xl lg:rounded-tl-4xl dark:shadow-none dark:outline-white/15">
                 <img
                   alt=""
                   src="https://tailwindcss.com/plus-assets/img/component-images/bento-02-releases.png"
@@ -222,17 +222,16 @@ export default function Home() {
                   className="h-80 object-cover object-left not-dark:hidden"
                 />
                 <div className="p-10">
-                  <h3 className="text-sm/4 font-semibold text-gray-500 dark:text-gray-400">Releases</h3>
-                  <p className="mt-2 text-lg font-medium tracking-tight text-gray-900 dark:text-white">Push to deploy</p>
+                  <h3 className="text-sm/4 font-semibold text-gray-500 dark:text-gray-400">More</h3>
+                  <p className="mt-2 text-lg font-medium tracking-tight text-gray-900 dark:text-white">More coins, more liquidity</p>
                   <p className="mt-2 max-w-lg text-sm/6 text-gray-600 dark:text-gray-400">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. In gravida justo et nulla efficitur, maximus
-                    egestas sem pellentesque.
+                    Trade Perp on more coins, trade with MAX liquidity
                   </p>
                 </div>
               </div>
             </div>
             <div className="flex p-px lg:col-span-2">
-              <div className="w-full overflow-hidden rounded-lg bg-white shadow-sm outline outline-black/5 lg:rounded-tr-4xl dark:bg-gray-800 dark:shadow-none dark:outline-white/15">
+              <div className="w-full overflow-hidden rounded-lg shadow-sm outline outline-black/5 lg:rounded-tr-4xl dark:shadow-none dark:outline-white/15">
                 <img
                   alt=""
                   src="https://tailwindcss.com/plus-assets/img/component-images/bento-02-integrations.png"
@@ -244,18 +243,18 @@ export default function Home() {
                   className="h-80 object-cover not-dark:hidden"
                 />
                 <div className="p-10">
-                  <h3 className="text-sm/4 font-semibold text-gray-500 dark:text-gray-400">Integrations</h3>
+                  <h3 className="text-sm/4 font-semibold text-gray-500 dark:text-gray-400">Multi-chain</h3>
                   <p className="mt-2 text-lg font-medium tracking-tight text-gray-900 dark:text-white">
-                    Connect your favorite tools
+                    Cross-chain trading
                   </p>
                   <p className="mt-2 max-w-lg text-sm/6 text-gray-600 dark:text-gray-400">
-                    Curabitur auctor, ex quis auctor venenatis, eros arcu rhoncus massa.
+                    Trade from your favorite chain, keep funds on where you like.
                   </p>
                 </div>
               </div>
             </div>
             <div className="flex p-px lg:col-span-2">
-              <div className="w-full overflow-hidden rounded-lg bg-white shadow-sm outline outline-black/5 lg:rounded-bl-4xl dark:bg-gray-800 dark:shadow-none dark:outline-white/15">
+              <div className="w-full overflow-hidden rounded-lg shadow-sm outline outline-black/5 lg:rounded-bl-4xl dark:shadow-none dark:outline-white/15">
                 <img
                   alt=""
                   src="https://tailwindcss.com/plus-assets/img/component-images/bento-02-security.png"
@@ -267,18 +266,18 @@ export default function Home() {
                   className="h-80 object-cover not-dark:hidden"
                 />
                 <div className="p-10">
-                  <h3 className="text-sm/4 font-semibold text-gray-500 dark:text-gray-400">Security</h3>
+                  <h3 className="text-sm/4 font-semibold text-gray-500 dark:text-gray-400">Farming</h3>
                   <p className="mt-2 text-lg font-medium tracking-tight text-gray-900 dark:text-white">
-                    Advanced access control
+                    Farm all Perp DEXs in one place
                   </p>
                   <p className="mt-2 max-w-lg text-sm/6 text-gray-600 dark:text-gray-400">
-                    Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia.
+                    Why swapping between different DEXs, trade all of them right in here.
                   </p>
                 </div>
               </div>
             </div>
             <div className="flex p-px lg:col-span-4">
-              <div className="w-full overflow-hidden rounded-lg bg-white shadow-sm outline outline-black/5 max-lg:rounded-b-4xl lg:rounded-br-4xl dark:bg-gray-800 dark:shadow-none dark:outline-white/15">
+              <div className="w-full overflow-hidden rounded-lg shadow-sm outline outline-black/5 max-lg:rounded-b-4xl lg:rounded-br-4xl dark:shadow-none dark:outline-white/15">
                 <img
                   alt=""
                   src="https://tailwindcss.com/plus-assets/img/component-images/bento-02-performance.png"
@@ -290,13 +289,12 @@ export default function Home() {
                   className="h-80 object-cover object-left not-dark:hidden"
                 />
                 <div className="p-10">
-                  <h3 className="text-sm/4 font-semibold text-gray-500 dark:text-gray-400">Performance</h3>
+                  <h3 className="text-sm/4 font-semibold text-gray-500 dark:text-gray-400">Flexibility</h3>
                   <p className="mt-2 text-lg font-medium tracking-tight text-gray-900 dark:text-white">
-                    Lightning-fast builds
+                    Easy/Pro mode
                   </p>
                   <p className="mt-2 max-w-lg text-sm/6 text-gray-600 dark:text-gray-400">
-                    Sed congue eros non finibus molestie. Vestibulum euismod augue vel commodo vulputate. Maecenas at
-                    augue sed elit dictum vulputate.
+                    {`Whether you are a Perp newbie or pro, trade the way you like. We give you the max flexibility on how you'd like to trade`}
                   </p>
                 </div>
               </div>
@@ -305,11 +303,11 @@ export default function Home() {
         </div>
       </div>
       <div className="px-4 sm:px-6 py-10 sm:py-20 sm:mx-20">
-        <h3 className="text-6xl sm:text-8xl text-muted-foreground"><span className="text-white">Tangerine</span> is community first, everyone gets a slice. Experience onchain <span className="text-white">Perp trading</span> like never before.</h3>
+        <h3 className="text-5xl sm:text-7xl text-muted-foreground"><span className="text-white">Tangerine</span> is community first, everyone gets a slice. Experience onchain <span className="text-white">Perp trading</span> like never before.</h3>
       </div>
       <div>
         <div className="mx-auto max-w-7xl py-24 sm:px-6 sm:py-32 lg:px-8">
-          <div className="relative isolate overflow-hidden bg-gray-800 px-6 py-24 text-center after:pointer-events-none after:absolute after:inset-0 after:inset-ring after:inset-ring-white/10 sm:rounded-3xl sm:px-16 after:sm:rounded-3xl">
+          <div className="relative isolate overflow-hidden px-6 py-24 text-center after:pointer-events-none after:absolute after:inset-0 after:inset-ring after:inset-ring-white/10 sm:rounded-3xl sm:px-16 after:sm:rounded-3xl">
             <h2 className="text-4xl font-semibold tracking-tight text-balance text-white sm:text-5xl">
               Early access coming soon
             </h2>
@@ -333,8 +331,8 @@ export default function Home() {
               <circle r={512} cx={512} cy={512} fill="url(#827591b1-ce8c-4110-b064-7cb85a0b1217)" fillOpacity="0.7" />
               <defs>
                 <radialGradient id="827591b1-ce8c-4110-b064-7cb85a0b1217">
-                  <stop stopColor="#7775D6" />
-                  <stop offset={1} stopColor="#E935C1" />
+                  <stop stopColor="#f2995a" />
+                  <stop offset={1} stopColor="#f97316" />
                 </radialGradient>
               </defs>
             </svg>
