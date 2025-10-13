@@ -114,47 +114,39 @@ export default function Home() {
       </div>
       <div className="py-24 sm:py-32">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
-          <h2 className="text-center text-lg/8 font-semibold text-white">Trusted by the world’s most innovative teams</h2>
-          <div className="mx-auto mt-10 grid max-w-lg grid-cols-4 items-center gap-x-8 gap-y-10 sm:max-w-xl sm:grid-cols-6 sm:gap-x-10 lg:mx-0 lg:max-w-none lg:grid-cols-5">
-            <img
-              alt="Transistor"
-              src="https://tailwindcss.com/plus-assets/img/logos/158x48/transistor-logo-white.svg"
+          <h2 className="text-center text-lg/8 font-semibold text-white">All the Perp DEXs you love</h2>
+          <div className="mx-auto mt-10 grid max-w-lg grid-cols-4 items-center gap-x-8 gap-y-10 sm:max-w-xl sm:grid-cols-6 sm:gap-x-10 lg:mx-0 lg:max-w-none lg:grid-cols-5 place-items-center">
+            <Image
+              alt="Hyperliquid"
+              src="/images/platforms/hyperliquid-text.png"
               width={158}
               height={48}
               className="col-span-2 max-h-12 w-full object-contain lg:col-span-1"
             />
-
-            <img
-              alt="Reform"
-              src="https://tailwindcss.com/plus-assets/img/logos/158x48/reform-logo-white.svg"
+            <Image
+              alt="Aster"
+              src="/images/platforms/aster-text.png"
               width={158}
               height={48}
               className="col-span-2 max-h-12 w-full object-contain lg:col-span-1"
             />
-
-            <img
-              alt="Tuple"
-              src="https://tailwindcss.com/plus-assets/img/logos/158x48/tuple-logo-white.svg"
+            <Image
+              alt="Lighter"
+              src="/images/platforms/lighter-text.png"
               width={158}
               height={48}
               className="col-span-2 max-h-12 w-full object-contain lg:col-span-1"
             />
-
-            <img
-              alt="SavvyCal"
-              src="https://tailwindcss.com/plus-assets/img/logos/158x48/savvycal-logo-white.svg"
+            <Image
+              alt="Backpack"
+              src="/images/platforms/backpack-text.png"
               width={158}
               height={48}
-              className="col-span-2 max-h-12 w-full object-contain sm:col-start-2 lg:col-span-1"
+              className="col-span-2 max-h-12 w-full object-contain lg:col-span-1"
             />
-
-            <img
-              alt="Statamic"
-              src="https://tailwindcss.com/plus-assets/img/logos/158x48/statamic-logo-white.svg"
-              width={158}
-              height={48}
-              className="col-span-2 col-start-2 max-h-12 w-full object-contain sm:col-start-auto lg:col-span-1"
-            />
+            <div className="font-semibold sm:text-xl">
+              and more...
+            </div>
           </div>
         </div>
       </div>
@@ -178,7 +170,7 @@ export default function Home() {
               height={350}
             />
           </div>
-          <div className="p-4 sm:p-6 sm:mx-20 flex flex-col sm:flex-row items-center justify-center">
+          <div className="p-4 sm:p-6 sm:mx-20 flex flex-col-reverse sm:flex-row items-center justify-center">
             <Image
               src="/images/cubes.png"
               alt='Cubes'
@@ -186,19 +178,19 @@ export default function Home() {
               height={350}
             />
             <div className="flex space-y-2 sm:space-y-4 flex-col sm:w-1/2">
-              <label className='text-primary font-semibold'>Connect</label>
-              <h3 className="font-bold text-2xl sm:text-4xl">All portfolio in one</h3>
+              <label className='text-primary font-semibold'>Simple</label>
+              <h3 className="font-bold text-2xl sm:text-4xl">Simple, but powerful</h3>
               <p className="text-lg sm:text-xl md:text-xl text-white/70 max-w-3xl mx-auto font-medium">
-                Manage all your Perp positions, orders and trading history in one place.
+                Simplified UI, Perp trading has never been easy. Design for everyone, whether your are newbie or pro.
               </p>
             </div>
           </div>
           <div className="p-4 sm:p-6 sm:mx-20 flex flex-col sm:flex-row items-center justify-center">
             <div className="flex space-y-2 sm:space-y-4 flex-col sm:w-1/2">
-              <label className='text-primary font-semibold'>Connect</label>
-              <h3 className="font-bold text-2xl sm:text-4xl">All portfolio in one</h3>
+              <label className='text-primary font-semibold'>Opportunity</label>
+              <h3 className="font-bold text-2xl sm:text-4xl">Better execution</h3>
               <p className="text-lg sm:text-xl md:text-xl text-white/70 max-w-3xl mx-auto font-medium">
-                Manage all your Perp positions, orders and trading history in one place.
+                Better execution, better gains. We will find the best market to place your order.
               </p>
             </div>
             <Image
