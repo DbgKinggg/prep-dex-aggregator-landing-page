@@ -26,6 +26,7 @@ export function LandingFooter({ links }: LandingFooterProps) {
                 key={item.name}
                 href={item.href}
                 className="text-black hover:text-black/60"
+                target="_blank"
               >
                 <span className="sr-only">{item.name}</span>
                 <item.icon aria-hidden="true" className="size-6" />
