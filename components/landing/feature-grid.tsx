@@ -4,9 +4,8 @@ type Feature = {
   label: string;
   title: string;
   description: string;
-  lightImage: string;
-  darkImage: string;
   className: string;
+  renderContent: () => JSX.Element;
 };
 
 const features: Feature[] = [
@@ -14,44 +13,38 @@ const features: Feature[] = [
     label: "More",
     title: "More coins, more liquidity",
     description: "Trade Perp on more coins, trade with MAX liquidity.",
-    lightImage:
-      "https://tailwindcss.com/plus-assets/img/component-images/bento-02-releases.png",
-    darkImage:
-      "https://tailwindcss.com/plus-assets/img/component-images/dark-bento-02-releases.png",
     className: "lg:col-span-4",
+    renderContent: () => <LiquidityGrid />,
   },
   {
     label: "Multi-chain",
     title: "Cross-chain trading",
     description:
       "Trade from your favorite chain, keep funds on where you like.",
-    lightImage:
-      "https://tailwindcss.com/plus-assets/img/component-images/bento-02-integrations.png",
-    darkImage:
-      "https://tailwindcss.com/plus-assets/img/component-images/dark-bento-02-integrations.png",
     className: "lg:col-span-2",
+    renderContent: () => (
+      <PlaceholderCard label="Network mesh visualization coming soon" />
+    ),
   },
   {
     label: "Farming",
     title: "Farm all Perp DEXs in one place",
     description:
       "Why swap between different DEXs when you can trade all of them right here.",
-    lightImage:
-      "https://tailwindcss.com/plus-assets/img/component-images/bento-02-security.png",
-    darkImage:
-      "https://tailwindcss.com/plus-assets/img/component-images/dark-bento-02-security.png",
     className: "lg:col-span-2",
+    renderContent: () => (
+      <PlaceholderCard label="Rewards dashboard layout coming soon" />
+    ),
   },
   {
     label: "Flexibility",
     title: "Easy/Pro mode",
     description:
       "Whether you are a Perp newbie or pro, trade the way you like. We give you the max flexibility on how you'd like to trade.",
-    lightImage:
-      "https://tailwindcss.com/plus-assets/img/component-images/bento-02-performance.png",
-    darkImage:
-      "https://tailwindcss.com/plus-assets/img/component-images/dark-bento-02-performance.png",
     className: "lg:col-span-4",
+    renderContent: () => (
+      <PlaceholderCard label="Mode toggler interaction coming soon" />
+    ),
   },
 ];
 
@@ -70,7 +63,7 @@ export function FeatureGrid() {
             <div key={feature.title} className={`flex p-px ${feature.className}`}>
               <div
                 className={[
-                  "w-full overflow-hidden rounded-lg shadow-sm outline outline-black/5 dark:outline-white/15 dark:shadow-none",
+                  "flex h-full w-full flex-col overflow-hidden rounded-lg shadow-sm outline outline-black/5 dark:outline-white/15 dark:shadow-none",
                   index === 0
                     ? "max-lg:rounded-t-4xl lg:rounded-tl-4xl"
                     : "",
@@ -83,21 +76,8 @@ export function FeatureGrid() {
                   .filter(Boolean)
                   .join(" ")}
               >
-                <div className="relative h-80 w-full">
-                  <Image
-                    src={feature.lightImage}
-                    alt={feature.title}
-                    fill
-                    className="object-cover object-left dark:hidden"
-                    sizes="(min-width: 1024px) 33vw, 100vw"
-                  />
-                  <Image
-                    src={feature.darkImage}
-                    alt={feature.title}
-                    fill
-                    className="hidden object-cover object-left dark:block"
-                    sizes="(min-width: 1024px) 33vw, 100vw"
-                  />
+                <div className="flex h-80 w-full flex-shrink-0 items-center justify-center bg-gradient-to-br from-white/8 via-white/10 to-white/5 backdrop-blur">
+                  {feature.renderContent()}
                 </div>
                 <div className="p-10">
                   <h3 className="text-sm font-semibold text-gray-500 dark:text-gray-400">
@@ -116,5 +96,73 @@ export function FeatureGrid() {
         </div>
       </div>
     </section>
+  );
+}
+
+const liquidityRows = [
+  Array.from({ length: 5 }),
+  Array.from({ length: 5 }),
+  Array.from({ length: 5 }),
+];
+
+function LiquidityGrid() {
+  return (
+    <div className="flex w-full max-w-4xl flex-col gap-6 px-4 sm:px-8">
+      {liquidityRows.map((row, rowIndex) => (
+        <div
+          key={rowIndex}
+          className="flex w-full items-center justify-center gap-4 sm:gap-6"
+          style={{
+            transform:
+              rowIndex === 0
+                ? "translateX(-12px)"
+                : rowIndex === 1
+                  ? "translateX(8px)"
+                  : "translateX(-32px)",
+          }}
+        >
+          {row.map((_, coinIndex) => (
+            <CoinBadge
+              key={`${rowIndex}-${coinIndex}`}
+              hiddenOnMobile={coinIndex >= 3}
+            />
+          ))}
+        </div>
+      ))}
+    </div>
+  );
+}
+
+type CoinBadgeProps = {
+  hiddenOnMobile?: boolean;
+};
+
+function CoinBadge({ hiddenOnMobile }: CoinBadgeProps) {
+  return (
+    <div
+      className={[
+        "flex aspect-square max-w-[88px] flex-1 items-center justify-center rounded-3xl border border-white/10 bg-white/15 shadow-inner shadow-black/20 backdrop-blur",
+        hiddenOnMobile ? "hidden sm:flex" : "flex",
+      ].join(" ")}
+    >
+      <div className="flex h-16 w-16 items-center justify-center rounded-full bg-gradient-to-br from-white/60 to-white/20 shadow-lg shadow-black/25">
+        <Image
+          src="/images/tokens/btc.png"
+          alt="Token placeholder"
+          width={48}
+          height={48}
+          className="h-12 w-12 rounded-full object-cover"
+          priority
+        />
+      </div>
+    </div>
+  );
+}
+
+function PlaceholderCard({ label }: { label: string }) {
+  return (
+    <div className="flex h-full w-full items-center justify-center px-8 text-center text-sm font-semibold uppercase tracking-[0.2em] text-white/50">
+      {label}
+    </div>
   );
 }
