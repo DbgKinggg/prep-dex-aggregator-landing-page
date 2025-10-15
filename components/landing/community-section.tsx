@@ -8,9 +8,6 @@ export function CommunitySection() {
           <span className="text-white">Perp trading</span> like never before.
         </h3>
       </section>
-      <div className="text-center text-7xl text-white sm:text-[200px] xl:text-[300px]">
-        Tangerine
-      </div>
     </>
   );
 }
