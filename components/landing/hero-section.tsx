@@ -26,7 +26,7 @@ export function HeroSection({ onJoinWaitlist }: HeroSectionProps) {
         <div className="flex flex-col items-center justify-center gap-4 pt-8 sm:flex-row sm:gap-6">
           <Button
             onClick={onJoinWaitlist}
-            className="group relative inline-flex cursor-pointer items-center justify-center rounded-full bg-white px-8 py-4 text-base font-semibold text-black shadow-lg transition-all duration-200 hover:scale-105 hover:shadow-xl sm:text-lg"
+            className="group relative inline-flex cursor-pointer items-center justify-center rounded-full bg-white px-8 py-6 text-base font-semibold text-black shadow-lg transition-all duration-200 hover:scale-105 hover:shadow-xl sm:text-lg hover:bg-white"
             size="lg"
           >
             Join Early Access
@@ -47,7 +47,7 @@ export function HeroSection({ onJoinWaitlist }: HeroSectionProps) {
           <div className="relative">
             <Button
               disabled
-              className="inline-flex cursor-not-allowed items-center justify-center rounded-full border border-white/20 bg-white/10 px-8 py-4 text-base font-semibold text-white/40 backdrop-blur-sm sm:text-lg"
+              className="inline-flex cursor-not-allowed items-center justify-center rounded-full border border-white/20 bg-white/10 px-8 py-6 text-base font-semibold text-white/40 backdrop-blur-sm sm:text-lg"
               size="lg"
               variant="outline"
             >

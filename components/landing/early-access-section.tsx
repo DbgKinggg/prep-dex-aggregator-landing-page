@@ -1,4 +1,6 @@
-import { Button } from "@/components/ui/button";
+import { motion } from "motion/react";
+
+import { StarBorder } from "@/components/ui/star-border";
 
 type EarlyAccessSectionProps = {
   onJoinWaitlist: () => void;
@@ -18,13 +20,9 @@ export function EarlyAccessSection({
             Join now, get rewarded. We will let you know when we are out.
           </p>
           <div className="mt-10 flex items-center justify-center gap-x-6">
-            <Button
-              onClick={onJoinWaitlist}
-              variant="ghost"
-              className="rounded-md bg-white/10 px-3.5 py-2.5 text-sm font-semibold text-white inset-ring inset-ring-white/5 hover:bg-white/15"
-            >
+            <StarBorder onClick={onJoinWaitlist} className="cursor-pointer">
               Join Early Access
-            </Button>
+            </StarBorder>
           </div>
           <svg
             viewBox="0 0 1024 1024"
