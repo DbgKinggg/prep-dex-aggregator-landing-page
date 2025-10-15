@@ -1,3 +1,4 @@
+import { FarmPortfolioDemo } from "@/components/landing/farm-portfolio-demo";
 import { LiquidityGrid } from "@/components/landing/liquidity-grid";
 
 type Feature = {
@@ -32,9 +33,7 @@ const features: Feature[] = [
     description:
       "Why swap between different DEXs when you can trade all of them right here.",
     className: "lg:col-span-2",
-    renderContent: () => (
-      <PlaceholderCard label="Rewards dashboard layout coming soon" />
-    ),
+    renderContent: () => <FarmPortfolioDemo />,
   },
   {
     label: "Flexibility",
