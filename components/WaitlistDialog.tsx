@@ -87,7 +87,7 @@ export function WaitlistDialog({ open, onOpenChange }: WaitlistDialogProps) {
     try {
       // Create a message for the user to sign
       const timestamp = Date.now();
-      const message = `Sign this message to join the Tangerine waitlist.\n\nWallet: ${walletAddress}\nTimestamp: ${timestamp}`;
+      const message = `Sign this message to join the Tangerine early access waitlist.\n\nWallet: ${walletAddress}\nTimestamp: ${timestamp}`;
 
       // Detect wallet type from CAIP address
       const isSolana = caipAddress?.startsWith('solana:');
@@ -219,7 +219,7 @@ export function WaitlistDialog({ open, onOpenChange }: WaitlistDialogProps) {
             Submitting...
           </>
         ) : (
-          'Join Waitlist'
+          'Join Early Access'
         )}
       </Button>
     </form>
@@ -230,10 +230,10 @@ export function WaitlistDialog({ open, onOpenChange }: WaitlistDialogProps) {
       <Drawer open={open} onOpenChange={onOpenChange}>
         <DrawerContent>
           <DrawerHeader>
-            <DrawerTitle>Join the Waitlist</DrawerTitle>
+            <DrawerTitle>Join the Early Access</DrawerTitle>
             <DrawerDescription>
               Connect your wallet to join the
-              waitlist.
+              early access waitlist.
             </DrawerDescription>
           </DrawerHeader>
           <div className="px-4 pb-8">
@@ -250,7 +250,7 @@ export function WaitlistDialog({ open, onOpenChange }: WaitlistDialogProps) {
         <DialogHeader>
           <DialogTitle>Join the Waitlist</DialogTitle>
           <DialogDescription>
-            Connect your wallet to join the waitlist.
+            Connect your wallet to join the early access waitlist.
           </DialogDescription>
         </DialogHeader>
         {formContent}
