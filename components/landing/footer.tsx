@@ -41,7 +41,7 @@ export function LandingFooter({ links }: LandingFooterProps) {
               viewport={{ once: true, amount: 0.4 }}
               transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
             >
-              Tangerine&nbsp;©&nbsp;{new Date().getFullYear()}
+              🍊 Tangerine&nbsp;©&nbsp;{new Date().getFullYear()}
             </motion.span>
           </div>
           <motion.div

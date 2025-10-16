@@ -69,7 +69,7 @@ export function HeroSection({ onJoinWaitlist }: HeroSectionProps) {
           <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.97 }}>
             <Button
               onClick={onJoinWaitlist}
-              className="group relative inline-flex h-14 cursor-pointer items-center justify-center rounded-full bg-white px-8 py-6 text-base font-semibold text-primary-foreground shadow-[0_24px_80px_rgba(249,115,22,0.35)] transition-all duration-300 hover:shadow-[0_30px_100px_rgba(249,115,22,0.45)] sm:h-[3.5rem] sm:text-lg"
+              className="group relative inline-flex h-14 cursor-pointer items-center justify-center rounded-full bg-white px-8 py-6 text-base font-semibold text-primary-foreground shadow-[0_24px_80px_rgba(249,115,22,0.35)] transition-all duration-300 hover:shadow-[0_30px_100px_rgba(249,115,22,0.45)] hover:bg-white sm:h-[3.5rem]"
               size="lg"
             >
               Join Early Access
@@ -95,7 +95,7 @@ export function HeroSection({ onJoinWaitlist }: HeroSectionProps) {
           >
             <Button
               disabled
-              className="inline-flex h-14 cursor-not-allowed items-center justify-center rounded-full border border-white/15 bg-black/40 px-8 py-6 text-base font-semibold text-white/60 backdrop-blur-md transition-all duration-300 sm:h-[3.5rem] sm:text-lg"
+              className="inline-flex h-14 cursor-not-allowed items-center justify-center rounded-full border border-white/15 bg-black/40 px-8 py-6 text-base font-semibold text-white/60 backdrop-blur-md transition-all duration-300 sm:h-[3.5rem]"
               size="lg"
               variant="outline"
             >
