@@ -34,12 +34,44 @@ const defaultProps: Required<RippleGridProps> = {
 };
 
 export function RippleGrid(props: RippleGridProps) {
-  const options = { ...defaultProps, ...props };
+  const {
+    enableRainbow = defaultProps.enableRainbow,
+    gridColor = defaultProps.gridColor,
+    rippleIntensity = defaultProps.rippleIntensity,
+    gridSize = defaultProps.gridSize,
+    gridThickness = defaultProps.gridThickness,
+    fadeDistance = defaultProps.fadeDistance,
+    vignetteStrength = defaultProps.vignetteStrength,
+    glowIntensity = defaultProps.glowIntensity,
+    opacity = defaultProps.opacity,
+    gridRotation = defaultProps.gridRotation,
+    mouseInteraction = defaultProps.mouseInteraction,
+    mouseInteractionRadius = defaultProps.mouseInteractionRadius,
+  } = props;
   const containerRef = useRef<HTMLDivElement>(null);
   const mousePositionRef = useRef({ x: 0.5, y: 0.5 });
   const targetMouseRef = useRef({ x: 0.5, y: 0.5 });
   const mouseInfluenceRef = useRef(0);
-  const uniformsRef = useRef<any>(null);
+  type Uniforms = {
+    iTime: { value: number };
+    iResolution: { value: [number, number] };
+    enableRainbow: { value: boolean };
+    gridColor: { value: [number, number, number] };
+    rippleIntensity: { value: number };
+    gridSize: { value: number };
+    gridThickness: { value: number };
+    fadeDistance: { value: number };
+    vignetteStrength: { value: number };
+    glowIntensity: { value: number };
+    opacity: { value: number };
+    gridRotation: { value: number };
+    mouseInteraction: { value: boolean };
+    mousePosition: { value: [number, number] };
+    mouseInfluence: { value: number };
+    mouseInteractionRadius: { value: number };
+  };
+
+  const uniformsRef = useRef<Uniforms | null>(null);
   const rafRef = useRef<number>();
 
   useEffect(() => {
@@ -169,23 +201,23 @@ export function RippleGrid(props: RippleGridProps) {
     }
     `;
 
-    const uniforms = {
+    const uniforms: Uniforms = {
       iTime: { value: 0 },
       iResolution: { value: [1, 1] },
-      enableRainbow: { value: options.enableRainbow },
-      gridColor: { value: hexToRgb(options.gridColor) },
-      rippleIntensity: { value: options.rippleIntensity },
-      gridSize: { value: options.gridSize },
-      gridThickness: { value: options.gridThickness },
-      fadeDistance: { value: options.fadeDistance },
-      vignetteStrength: { value: options.vignetteStrength },
-      glowIntensity: { value: options.glowIntensity },
-      opacity: { value: options.opacity },
-      gridRotation: { value: options.gridRotation },
-      mouseInteraction: { value: options.mouseInteraction },
+      enableRainbow: { value: enableRainbow },
+      gridColor: { value: hexToRgb(gridColor) },
+      rippleIntensity: { value: rippleIntensity },
+      gridSize: { value: gridSize },
+      gridThickness: { value: gridThickness },
+      fadeDistance: { value: fadeDistance },
+      vignetteStrength: { value: vignetteStrength },
+      glowIntensity: { value: glowIntensity },
+      opacity: { value: opacity },
+      gridRotation: { value: gridRotation },
+      mouseInteraction: { value: mouseInteraction },
       mousePosition: { value: [0.5, 0.5] },
       mouseInfluence: { value: 0 },
-      mouseInteractionRadius: { value: options.mouseInteractionRadius },
+      mouseInteractionRadius: { value: mouseInteractionRadius },
     };
 
     uniformsRef.current = uniforms;
@@ -201,7 +233,7 @@ export function RippleGrid(props: RippleGridProps) {
     };
 
     const handleMouseMove = (event: MouseEvent) => {
-      if (!options.mouseInteraction) return;
+      if (!mouseInteraction) return;
       const rect = container.getBoundingClientRect();
       const x = (event.clientX - rect.left) / rect.width;
       const y = 1 - (event.clientY - rect.top) / rect.height;
@@ -209,17 +241,17 @@ export function RippleGrid(props: RippleGridProps) {
     };
 
     const handleMouseEnter = () => {
-      if (!options.mouseInteraction) return;
+      if (!mouseInteraction) return;
       mouseInfluenceRef.current = 1;
     };
 
     const handleMouseLeave = () => {
-      if (!options.mouseInteraction) return;
+      if (!mouseInteraction) return;
       mouseInfluenceRef.current = 0;
     };
 
     window.addEventListener("resize", resize);
-    if (options.mouseInteraction) {
+    if (mouseInteraction) {
       container.addEventListener("mousemove", handleMouseMove);
       container.addEventListener("mouseenter", handleMouseEnter);
       container.addEventListener("mouseleave", handleMouseLeave);
@@ -245,7 +277,7 @@ export function RippleGrid(props: RippleGridProps) {
 
     return () => {
       window.removeEventListener("resize", resize);
-      if (options.mouseInteraction) {
+      if (mouseInteraction) {
         container.removeEventListener("mousemove", handleMouseMove);
         container.removeEventListener("mouseenter", handleMouseEnter);
         container.removeEventListener("mouseleave", handleMouseLeave);
@@ -255,7 +287,20 @@ export function RippleGrid(props: RippleGridProps) {
       container.removeChild(canvas);
       renderer.gl.getExtension("WEBGL_lose_context")?.loseContext();
     };
-  }, [options.enableRainbow, options.mouseInteraction, options.mouseInteractionRadius, options.gridRotation, options.glowIntensity, options.gridThickness, options.fadeDistance, options.gridColor, options.gridSize, options.opacity, options.rippleIntensity, options.vignetteStrength]);
+  }, [
+    enableRainbow,
+    mouseInteraction,
+    mouseInteractionRadius,
+    gridRotation,
+    glowIntensity,
+    gridThickness,
+    fadeDistance,
+    gridColor,
+    gridSize,
+    opacity,
+    rippleIntensity,
+    vignetteStrength,
+  ]);
 
   useEffect(() => {
     if (!uniformsRef.current) return;
@@ -271,19 +316,32 @@ export function RippleGrid(props: RippleGridProps) {
         : [1, 1, 1];
     };
 
-    uniformsRef.current.enableRainbow.value = options.enableRainbow;
-    uniformsRef.current.gridColor.value = hexToRgb(options.gridColor);
-    uniformsRef.current.rippleIntensity.value = options.rippleIntensity;
-    uniformsRef.current.gridSize.value = options.gridSize;
-    uniformsRef.current.gridThickness.value = options.gridThickness;
-    uniformsRef.current.fadeDistance.value = options.fadeDistance;
-    uniformsRef.current.vignetteStrength.value = options.vignetteStrength;
-    uniformsRef.current.glowIntensity.value = options.glowIntensity;
-    uniformsRef.current.opacity.value = options.opacity;
-    uniformsRef.current.gridRotation.value = options.gridRotation;
-    uniformsRef.current.mouseInteraction.value = options.mouseInteraction;
-    uniformsRef.current.mouseInteractionRadius.value = options.mouseInteractionRadius;
-  }, [options]);
+    uniformsRef.current.enableRainbow.value = enableRainbow;
+    uniformsRef.current.gridColor.value = hexToRgb(gridColor);
+    uniformsRef.current.rippleIntensity.value = rippleIntensity;
+    uniformsRef.current.gridSize.value = gridSize;
+    uniformsRef.current.gridThickness.value = gridThickness;
+    uniformsRef.current.fadeDistance.value = fadeDistance;
+    uniformsRef.current.vignetteStrength.value = vignetteStrength;
+    uniformsRef.current.glowIntensity.value = glowIntensity;
+    uniformsRef.current.opacity.value = opacity;
+    uniformsRef.current.gridRotation.value = gridRotation;
+    uniformsRef.current.mouseInteraction.value = mouseInteraction;
+    uniformsRef.current.mouseInteractionRadius.value = mouseInteractionRadius;
+  }, [
+    enableRainbow,
+    gridColor,
+    rippleIntensity,
+    gridSize,
+    gridThickness,
+    fadeDistance,
+    vignetteStrength,
+    glowIntensity,
+    opacity,
+    gridRotation,
+    mouseInteraction,
+    mouseInteractionRadius,
+  ]);
 
   return <div ref={containerRef} className="relative h-full w-full" />;
 }
