@@ -33,7 +33,7 @@ export function LandingFooter({ links }: LandingFooterProps) {
           viewport={{ once: true, amount: 0.4 }}
           transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1], delay: 0.1 }}
         >
-          <div className="flex w-full items-center justify-center gap-3 text-sm font-medium text-black/80 sm:w-auto sm:justify-start">
+          <div className="flex w-full items-center justify-start gap-3 text-sm font-medium text-black/80 sm:w-auto">
             <motion.span
               className="text-base text-black"
               initial={{ opacity: 0, y: 12 }}

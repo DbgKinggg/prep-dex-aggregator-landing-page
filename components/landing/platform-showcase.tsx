@@ -29,7 +29,7 @@ export function PlatformShowcase() {
       viewport={{ once: true, amount: 0.35 }}
       transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
     >
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div className="mx-auto max-w-7xl px-8 sm:px-6 lg:px-8">
         <motion.h2
           className="text-center text-lg font-semibold text-white"
           initial={{ opacity: 0, y: 20 }}
