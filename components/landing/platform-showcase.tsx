@@ -5,18 +5,22 @@ const platforms = [
   {
     name: "Hyperliquid",
     src: "/images/platforms/hyperliquid-text.png",
+    href: "https://hyperliquid.xyz",
   },
   {
     name: "Aster",
     src: "/images/platforms/aster-text.png",
+    href: "https://www.asterdex.com/",
   },
   {
     name: "Lighter",
     src: "/images/platforms/lighter-text.png",
+    href: "https://lighter.xyz/",
   },
   {
     name: "Backpack",
     src: "/images/platforms/backpack-text.png",
+    href: "https://backpack.exchange/",
   },
 ];
 
@@ -61,15 +65,21 @@ export function PlatformShowcase() {
                   transition: { duration: 0.5, ease: [0.22, 1, 0.36, 1] },
                 },
               }}
-              whileHover={{ scale: 1.05 }}
             >
-              <Image
-                alt={platform.name}
-                src={platform.src}
-                width={158}
-                height={48}
-                className="max-h-12 w-full object-contain"
-              />
+              <a
+                href={platform.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex w-full items-center justify-center p-4"
+              >
+                <Image
+                  alt={platform.name}
+                  src={platform.src}
+                  width={158}
+                  height={48}
+                  className="max-h-12 w-full object-contain"
+                />
+              </a>
             </motion.div>
           ))}
           <motion.div
