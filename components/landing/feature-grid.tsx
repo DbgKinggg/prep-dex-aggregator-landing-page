@@ -1,3 +1,5 @@
+import { motion } from "motion/react";
+
 import { CrossChainCarousel } from "@/components/landing/cross-chain-carousel";
 import { FarmPortfolioDemo } from "@/components/landing/farm-portfolio-demo";
 import { LiquidityGrid } from "@/components/landing/liquidity-grid";
@@ -47,17 +49,58 @@ const features: Feature[] = [
 
 export function FeatureGrid() {
   return (
-    <section className="py-16 sm:py-24">
-      <div className="mx-auto max-w-2xl px-4 sm:px-6 lg:max-w-5xl lg:px-8">
+    <motion.section
+      className="py-16 sm:py-24"
+      initial={{ opacity: 0, y: 40 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, amount: 0.25 }}
+      transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+    >
+      <motion.div
+        className="mx-auto max-w-2xl px-4 sm:px-6 lg:max-w-5xl lg:px-8"
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.3 }}
+        variants={{
+          hidden: { opacity: 0, y: 24 },
+          visible: {
+            opacity: 1,
+            y: 0,
+            transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] },
+          },
+        }}
+      >
         <h2 className="text-base font-semibold text-indigo-600 dark:text-indigo-400">
           Trade faster
         </h2>
         <p className="mt-2 max-w-lg text-4xl font-semibold tracking-tight text-pretty text-gray-900 dark:text-white sm:text-5xl">
           But why choose us?
         </p>
-        <div className="mt-10 grid grid-cols-1 gap-4 sm:mt-16 lg:grid-cols-6 lg:grid-rows-2">
+        <motion.div
+          className="mt-10 grid grid-cols-1 gap-4 sm:mt-16 lg:grid-cols-6 lg:grid-rows-2"
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.25 }}
+          variants={{
+            hidden: {},
+            visible: { transition: { staggerChildren: 0.12, delayChildren: 0.1 } },
+          }}
+        >
           {features.map((feature, index) => (
-            <div key={feature.title} className={`flex p-px ${feature.className}`}>
+            <motion.div
+              key={feature.title}
+              className={`flex p-px ${feature.className}`}
+              variants={{
+                hidden: { opacity: 0, y: 30, scale: 0.96 },
+                visible: {
+                  opacity: 1,
+                  y: 0,
+                  scale: 1,
+                  transition: { duration: 0.55, ease: [0.22, 1, 0.36, 1] },
+                },
+              }}
+              whileHover={{ y: -6 }}
+            >
               <div
                 className={[
                   "flex h-full w-full flex-col overflow-hidden rounded-lg shadow-sm outline outline-black/5 dark:outline-white/15 dark:shadow-none",
@@ -88,11 +131,11 @@ export function FeatureGrid() {
                   </p>
                 </div>
               </div>
-            </div>
+            </motion.div>
           ))}
-        </div>
-      </div>
-    </section>
+        </motion.div>
+      </motion.div>
+    </motion.section>
   );
 }
 
