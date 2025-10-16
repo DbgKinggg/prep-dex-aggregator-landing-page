@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from "react";
-import { AnimatePresence, motion } from "motion/react";
+import { motion } from "motion/react";
 
 import { ButtonGroup } from "@/components/ui/button-group";
 
