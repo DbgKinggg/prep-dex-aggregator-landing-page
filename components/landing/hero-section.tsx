@@ -23,10 +23,10 @@ export function HeroSection({ onJoinWaitlist }: HeroSectionProps) {
           Trade and manage Perp Trading across Hyperliquid, Aster, Lighter and
           more Perp DEXs.
         </p>
-        <div className="flex flex-col items-center justify-center gap-4 pt-8 sm:flex-row sm:gap-6">
+        <div className="flex flex-col items-center justify-center gap-4 pt-10 sm:flex-row sm:gap-6">
           <Button
             onClick={onJoinWaitlist}
-            className="group relative inline-flex cursor-pointer items-center justify-center rounded-full bg-white px-8 py-6 text-base font-semibold text-black shadow-lg transition-all duration-200 hover:scale-105 hover:shadow-xl sm:text-lg hover:bg-white"
+            className="group relative inline-flex cursor-pointer items-center bg-white justify-center hover:bg-white px-8 py-6 text-base font-semibold text-primary-foreground shadow-[0_24px_80px_rgba(249,115,22,0.35)] transition-all duration-300 hover:scale-105 hover:shadow-[0_30px_100px_rgba(249,115,22,0.45)]"
             size="lg"
           >
             Join Early Access
@@ -47,13 +47,13 @@ export function HeroSection({ onJoinWaitlist }: HeroSectionProps) {
           <div className="relative">
             <Button
               disabled
-              className="inline-flex cursor-not-allowed items-center justify-center rounded-full border border-white/20 bg-white/10 px-8 py-6 text-base font-semibold text-white/40 backdrop-blur-sm sm:text-lg"
+              className="inline-flex cursor-not-allowed items-center justify-center border border-white/15 bg-black/40 px-8 py-6 text-base font-semibold text-white/60 backdrop-blur-md transition-all duration-300 hover:scale-100"
               size="lg"
               variant="outline"
             >
               Launch App
             </Button>
-            <span className="absolute -right-2 -top-2 rounded-full bg-orange-400 px-3 py-1 text-xs font-bold text-black shadow-lg">
+            <span className="absolute -right-2 -top-2 rounded-full bg-primary px-3 py-1 text-xs font-semibold text-primary-foreground shadow-[0_12px_30px_rgba(249,115,22,0.45)]">
               Coming Soon
             </span>
           </div>

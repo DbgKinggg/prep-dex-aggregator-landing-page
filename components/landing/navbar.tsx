@@ -34,7 +34,7 @@ export function LandingNavbar({
         <Button
           onClick={onConnect}
           variant="outline"
-          className="cursor-pointer rounded-full border-white/20 bg-white/10 px-4 py-2 text-xs text-white transition-all hover:bg-white/20 sm:px-6 sm:py-2.5 sm:text-base"
+          className="cursor-pointer rounded-full border-white/20 bg-white/10 px-4 py-2 text-xs text-white transition-all hover:bg-white/20 sm:px-6 sm:py-2.5"
         >
           {displayLabel}
         </Button>
