@@ -21,8 +21,8 @@ const platforms = [
 
 export function PlatformShowcase() {
   return (
-    <section className="py-24 sm:py-32">
-      <div className="mx-auto max-w-7xl px-6 lg:px-8">
+    <section className="py-16 sm:py-24">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <h2 className="text-center text-lg font-semibold text-white">
           All the Perp DEXs you love
         </h2>

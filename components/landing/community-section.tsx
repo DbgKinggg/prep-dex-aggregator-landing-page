@@ -41,7 +41,7 @@ export function CommunitySection() {
 
   return (
     <motion.section
-      className="px-4 py-10 sm:mx-20 sm:px-6 sm:py-20"
+      className="mx-auto w-full max-w-5xl px-4 py-16 sm:px-6 sm:py-24 lg:px-8"
       initial={{ opacity: 0, y: 48 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.4 }}

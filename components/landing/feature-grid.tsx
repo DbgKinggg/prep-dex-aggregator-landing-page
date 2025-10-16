@@ -49,8 +49,8 @@ const features: Feature[] = [
 
 export function FeatureGrid() {
   return (
-    <section className="py-24 sm:py-32">
-      <div className="mx-auto max-w-2xl px-6 lg:max-w-7xl lg:px-8">
+    <section className="py-16 sm:py-24">
+      <div className="mx-auto max-w-2xl px-4 sm:px-6 lg:max-w-5xl lg:px-8">
         <h2 className="text-base font-semibold text-indigo-600 dark:text-indigo-400">
           Trade faster
         </h2>

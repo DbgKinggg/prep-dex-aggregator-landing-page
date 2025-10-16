@@ -10,8 +10,8 @@ export function EarlyAccessSection({
   onJoinWaitlist,
 }: EarlyAccessSectionProps) {
   return (
-    <section className="py-24">
-      <div className="mx-auto max-w-7xl px-6 sm:px-6 lg:px-8">
+    <section className="py-16 sm:py-24">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="relative isolate overflow-hidden px-6 py-24 text-center after:pointer-events-none after:absolute after:inset-0 after:inset-ring after:inset-ring-white/10 sm:rounded-3xl sm:px-16 after:sm:rounded-3xl">
           <h2 className="text-balance text-4xl font-semibold tracking-tight text-white sm:text-5xl">
             Early access coming soon
