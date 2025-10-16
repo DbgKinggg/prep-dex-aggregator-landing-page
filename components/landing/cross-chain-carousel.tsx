@@ -12,14 +12,19 @@ type Chain = {
 
 const chains: Chain[] = [
   {
-    name: "Ethereum",
-    symbol: "ETH",
-    logo: "/images/chains/ethereum.svg",
-  },
-  {
     name: "Solana",
     symbol: "SOL",
     logo: "/images/chains/solana.svg",
+  },
+  {
+    name: "Arbitrum",
+    symbol: "ARB",
+    logo: "/images/chains/arbitrum.svg",
+  },
+  {
+    name: "BSC",
+    symbol: "BSC",
+    logo: "/images/chains/bsc.svg",
   },
   {
     name: "Base",
@@ -27,9 +32,9 @@ const chains: Chain[] = [
     logo: "/images/chains/base.svg",
   },
   {
-    name: "Arbitrum",
-    symbol: "ARB",
-    logo: "/images/chains/arbitrum.svg",
+    name: "Ethereum",
+    symbol: "ETH",
+    logo: "/images/chains/ethereum.svg",
   },
   {
     name: "Polygon",
@@ -71,7 +76,7 @@ export function CrossChainCarousel() {
   }, [activeIndex, centerOnIndex]);
 
   return (
-    <div className="relative mx-auto flex h-full w-full max-w-md flex-col items-center justify-center">
+    <div className="relative mx-auto flex h-full w-full max-w-md flex-col items-center justify-center border border-white/10 bg-white/10">
       <div
         ref={trackRef}
         className="flex h-full w-full items-center gap-6 overflow-x-auto scroll-smooth px-3 py-5"
@@ -98,10 +103,15 @@ export function CrossChainCarousel() {
                 opacity: isActive ? 1 : 0.45,
                 filter: isActive ? "blur(0px)" : "blur(1px)",
               }}
+              whileHover={{
+                scale: isActive ? 1.04 : 0.85,
+                boxShadow: "0 40px 100px rgba(249, 115, 22, 0.45)",
+              }}
+              whileTap={{ scale: isActive ? 0.98 : 0.9 }}
               transition={{
                 type: "spring",
-                stiffness: 220,
-                damping: 28,
+                stiffness: 260,
+                damping: 20,
               }}
               style={{
                 boxShadow: isActive
@@ -114,7 +124,6 @@ export function CrossChainCarousel() {
                 alt={chain.name}
                 width={100}
                 height={100}
-                className="h-20 w-20 rounded-[18px] bg-background/25 p-3 object-contain"
               />
             </motion.button>
           );
