@@ -20,8 +20,8 @@ export function HeroSection({ onJoinWaitlist }: HeroSectionProps) {
           curated as one
         </h2>
         <p className="mx-auto max-w-3xl text-lg font-medium text-white/70 sm:max-w-xl sm:text-xl md:text-xl">
-          Trade and manage Perp Trading across Hyperliquid, Aster, Lighter and
-          more Perp DEXs.
+          Trade and manage perp positions across Hyperliquid, Aster, Lighter,
+          and more DEXs.
         </p>
         <div className="flex flex-col items-center justify-center gap-4 pt-10 sm:flex-row sm:gap-6">
           <Button

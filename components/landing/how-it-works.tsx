@@ -15,24 +15,24 @@ type Step = {
 const steps: Step[] = [
   {
     label: "Connect",
-    title: "All portfolio in one",
+    title: "Your portfolio in one place",
     description:
-      "Manage all your Perp positions, orders and trading history in one place.",
+      "Manage all your perp positions, orders, and trading history side by side.",
     bullets: [
       "Unified view",
-      "Manage positions, modify orders instantly",
+      "Modify positions and orders instantly",
       "Better risk management",
     ],
     imageSrc: "/images/illustrations/illustration-01.avif",
   },
   {
     label: "Simple",
-    title: "Simple, but powerful",
+    title: "Simple, yet powerful",
     description:
-      "Simplified UI, Perp trading has never been easy. Designed for everyone, whether you are newbie or pro.",
+      "A simplified UI that makes perp trading effortless. Designed for everyone, whether you're a newbie or a pro.",
     bullets: [
-      "Simple/Pro mode",
-      "Trade like swapping tokens",
+      "Simple & Pro modes",
+      "Trade as easily as swapping tokens",
       "Powerful presets",
     ],
     imageSrc: "/images/illustrations/illustration-02.avif",
@@ -42,10 +42,10 @@ const steps: Step[] = [
     label: "Learn",
     title: "Tangerine University",
     description:
-      "Learn how to trade Perp, from 0 to 1 in no time. Learn Perp trading knowledge here.",
+      "Learn how to trade perps from zero to one in no time. Build your perp trading knowledge here.",
     bullets: [
       "Helpful pro tips",
-      "Learn Perp trading from the Pros",
+      "Learn perp trading from the pros",
       "Knowledge base",
     ],
     imageSrc: "/images/illustrations/illustration-03.avif",

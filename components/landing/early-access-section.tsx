@@ -17,7 +17,7 @@ export function EarlyAccessSection({
             Early access coming soon
           </h2>
           <p className="mx-auto mt-6 max-w-xl text-pretty text-lg/8 text-gray-300">
-            Join now, get rewarded. We will let you know when we are out.
+            Join now and get rewarded. We'll let you know as soon as we're live.
           </p>
           <div className="mt-10 flex items-center justify-center gap-x-6">
             <StarBorder onClick={onJoinWaitlist} className="cursor-pointer">

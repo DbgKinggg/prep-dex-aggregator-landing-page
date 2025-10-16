@@ -23,7 +23,7 @@ const features: Feature[] = [
     label: "Multi-chain",
     title: "Cross-chain trading",
     description:
-      "Trade from your favorite chain, keep funds on where you like.",
+      "Trade from your favorite chain while keeping funds where you like.",
     className: "lg:col-span-2",
     renderContent: () => <CrossChainCarousel />,
   },
@@ -39,7 +39,7 @@ const features: Feature[] = [
     label: "Flexibility",
     title: "Easy/Pro mode",
     description:
-      "Whether you are a Perp newbie or pro, trade the way you like. We give you the max flexibility on how you'd like to trade.",
+      "Whether you're a perp newbie or pro, trade the way you like. We give you maximum flexibility in how you trade.",
     className: "lg:col-span-3",
     renderContent: () => <EasyProMode />,
   },
