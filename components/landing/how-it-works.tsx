@@ -4,6 +4,7 @@ type Step = {
   label: string;
   title: string;
   description: string;
+  bullets: string[];
   imageSrc: string;
   reverse?: boolean;
 };
@@ -14,14 +15,24 @@ const steps: Step[] = [
     title: "All portfolio in one",
     description:
       "Manage all your Perp positions, orders and trading history in one place.",
-    imageSrc: "/images/cubes.png",
+    bullets: [
+      "Unified view",
+      "Manage positions, modify orders instantly",
+      "Better risk management",
+    ],
+    imageSrc: "/images/illustrations/illustration-01.avif",
   },
   {
     label: "Simple",
     title: "Simple, but powerful",
     description:
       "Simplified UI, Perp trading has never been easy. Designed for everyone, whether you are newbie or pro.",
-    imageSrc: "/images/3d-tangerine.png",
+    bullets: [
+      "Simple/Pro mode",
+      "Trade like swapping tokens",
+      "Powerful presets",
+    ],
+    imageSrc: "/images/illustrations/illustration-02.avif",
     reverse: true,
   },
   {
@@ -29,7 +40,12 @@ const steps: Step[] = [
     title: "Tangerine University",
     description:
       "Learn how to trade Perp, from 0 to 1 in no time. Learn Perp trading knowledge here.",
-    imageSrc: "/images/cubes.png",
+    bullets: [
+      "Helpful pro tips",
+      "Learn Perp trading from the Pros",
+      "Knowledge base",
+    ],
+    imageSrc: "/images/illustrations/illustration-03.avif",
   },
 ];
 
@@ -46,28 +62,37 @@ export function HowItWorksSection() {
           {steps.map((step) => (
             <div
               key={step.title}
-              className={`flex flex-col items-center justify-center gap-6 rounded-3xl border border-white/10 bg-white/5 p-6 backdrop-blur md:flex-row md:gap-10 md:p-8 ${
-                step.reverse ? "md:flex-row-reverse" : ""
-              }`}
+              className={`flex flex-col overflow-hidden rounded-3xl border border-white/10 bg-white/5 backdrop-blur md:flex-row ${step.reverse ? "md:flex-row-reverse" : ""
+                }`}
             >
-              <div className="flex flex-col space-y-2 md:w-1/2 md:space-y-4">
+              <div className="flex flex-col space-y-2 px-6 py-6 md:w-1/2 md:space-y-4 md:px-8 md:py-8">
                 <span className="font-semibold text-primary">
                   {step.label}
                 </span>
                 <h3 className="text-2xl font-bold sm:text-4xl">
                   {step.title}
                 </h3>
-                <p className="mx-auto max-w-3xl text-lg font-medium text-white/70 sm:text-xl md:text-xl">
+                <p className="mx-auto max-w-3xl text-lg text-white/70">
                   {step.description}
                 </p>
+                <ul className="mt-4 space-y-2 text-sm text-white/70 sm:text-base font-semibold">
+                  {step.bullets.map((bullet, index) => (
+                    <li key={index} className="flex items-start gap-2">
+                      <span className="pt-0.5">🍊</span>
+                      <span>{bullet}</span>
+                    </li>
+                  ))}
+                </ul>
               </div>
-              <Image
-                src={step.imageSrc}
-                alt={step.title}
-                width={350}
-                height={350}
-                className="w-full max-w-xs md:max-w-none"
-              />
+              <div className="relative w-full md:w-1/2 md:self-stretch">
+                <Image
+                  src={step.imageSrc}
+                  alt={step.title}
+                  width={480}
+                  height={360}
+                  className="h-full w-full object-cover"
+                />
+              </div>
             </div>
           ))}
         </div>
