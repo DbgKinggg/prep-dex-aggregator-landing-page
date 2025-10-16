@@ -15,9 +15,9 @@ export function HeroSection({ onJoinWaitlist }: HeroSectionProps) {
     >
       <div className="mx-auto max-w-5xl space-y-2 sm:space-y-4">
         <h2 className="text-5xl font-bold leading-tight tracking-tight text-white sm:text-7xl md:text-7xl">
-          Perp Trading Made
+          All of Perp DEXs
           <br />
-          Easy and Accessible
+          curated as one
         </h2>
         <p className="mx-auto max-w-3xl text-lg font-medium text-white/70 sm:max-w-xl sm:text-xl md:text-xl">
           Trade and manage Perp Trading across Hyperliquid, Aster, Lighter and

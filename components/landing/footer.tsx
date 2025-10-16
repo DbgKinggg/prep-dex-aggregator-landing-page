@@ -19,8 +19,13 @@ export function LandingFooter({ links }: LandingFooterProps) {
         Tangerine
       </div>
       <footer className="bg-white">
-        <div className="mx-auto max-w-7xl px-6 py-4 md:flex md:items-center md:justify-between lg:px-8">
-          <div className="flex justify-center gap-x-6 md:order-2">
+        <div className="mx-auto flex max-w-7xl items-center justify-between flex-row gap-4 px-6 py-5 text-black lg:px-4">
+          <div className="flex sm:w-full items-center justify-center gap-3 text-sm font-medium text-black/80 sm:w-auto sm:justify-start">
+            <span className="text-base text-black">
+              Tangerine&nbsp;©&nbsp;{new Date().getFullYear()}
+            </span>
+          </div>
+          <div className="flex items-center gap-x-6">
             {links.map((item) => (
               <a
                 key={item.name}
@@ -33,10 +38,6 @@ export function LandingFooter({ links }: LandingFooterProps) {
               </a>
             ))}
           </div>
-          <p className="mt-8 text-center text-sm text-black md:order-1 md:mt-0">
-            &copy; {new Date().getFullYear()} Tangerine, Inc. All rights
-            reserved.
-          </p>
         </div>
       </footer>
     </>
