@@ -58,7 +58,7 @@ export function LiquidityGrid() {
 
   return (
     <div
-      className="relative flex h-80 w-full items-center justify-center border border-white/10 bg-white/10 px-4 py-8 sm:px-10"
+      className="relative flex h-full w-full items-center justify-center border border-white/10 bg-white/10 px-4 py-8 sm:px-10"
       onMouseEnter={() => setIsActive(true)}
       onMouseLeave={() => setIsActive(false)}
       onFocus={() => setIsActive(true)}
@@ -67,7 +67,7 @@ export function LiquidityGrid() {
     >
       <div className="pointer-events-none absolute inset-y-0 left-0 w-16 bg-gradient-to-r from-black via-black/70 to-transparent opacity-70" />
       <div className="pointer-events-none absolute inset-y-0 right-0 w-16 bg-gradient-to-l from-black via-black/70 to-transparent opacity-70" />
-      <div className="relative flex w-full flex-col gap-6 sm:gap-8">
+      <div className="relative flex h-full w-full flex-col justify-center gap-6 sm:gap-8">
         {liquidityRows.map((row, index) => (
           <LogoLoopRow key={`${row.direction}-${index}`} {...row} isActive={isActive} />
         ))}

@@ -1,3 +1,4 @@
+import { CrossChainCarousel } from "@/components/landing/cross-chain-carousel";
 import { FarmPortfolioDemo } from "@/components/landing/farm-portfolio-demo";
 import { LiquidityGrid } from "@/components/landing/liquidity-grid";
 
@@ -23,9 +24,7 @@ const features: Feature[] = [
     description:
       "Trade from your favorite chain, keep funds on where you like.",
     className: "lg:col-span-2",
-    renderContent: () => (
-      <PlaceholderCard label="Network mesh visualization coming soon" />
-    ),
+    renderContent: () => <CrossChainCarousel />,
   },
   {
     label: "Farming",

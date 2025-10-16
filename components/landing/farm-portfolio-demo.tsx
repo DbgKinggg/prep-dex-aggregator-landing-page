@@ -108,7 +108,7 @@ export function FarmPortfolioDemo() {
   }, [activeIndex, translateY]);
 
   return (
-    <div className="relative flex h-80 w-full items-center justify-center overflow-hidden border border-white/10 bg-gradient-to-br from-white/5 via-white/8 to-white/5 px-3 py-8 sm:px-4">
+    <div className="relative flex h-full w-full items-center justify-center overflow-hidden border border-white/10 bg-gradient-to-br from-white/5 via-white/8 to-white/5 px-3 py-8 sm:px-4">
       <div className="pointer-events-none absolute inset-x-12 top-1/2 z-0 h-40 -translate-y-1/2 rounded-full bg-gradient-to-r from-orange-500/15 via-purple-500/10 to-orange-500/15 blur-3xl" />
       <motion.div
         ref={containerRef}
