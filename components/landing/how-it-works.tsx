@@ -1,4 +1,7 @@
+'use client';
+
 import Image from "next/image";
+import { motion } from "motion/react";
 
 type Step = {
   label: string;
@@ -58,12 +61,16 @@ export function HowItWorksSection() {
           <br />
           starts right here
         </h2>
-        <div className="mt-10 flex flex-col space-y-6 md:mt-20 md:space-y-8">
+        <div className="mt-10 flex flex-col space-y-6 md:mt-20 md:space-y-12">
           {steps.map((step) => (
-            <div
+            <motion.article
               key={step.title}
               className={`flex flex-col overflow-hidden rounded-3xl border border-white/10 bg-white/5 backdrop-blur md:flex-row ${step.reverse ? "md:flex-row-reverse" : ""
                 }`}
+              initial={{ opacity: 0, y: 48 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+              viewport={{ once: true, amount: 0.3 }}
             >
               <div className="flex flex-col space-y-2 px-6 py-6 md:w-1/2 md:space-y-4 md:px-8 md:py-8">
                 <span className="font-semibold text-primary">
@@ -93,7 +100,7 @@ export function HowItWorksSection() {
                   className="h-full w-full object-cover"
                 />
               </div>
-            </div>
+            </motion.article>
           ))}
         </div>
       </div>
