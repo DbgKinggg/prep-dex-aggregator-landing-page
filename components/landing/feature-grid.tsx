@@ -1,6 +1,7 @@
 import { CrossChainCarousel } from "@/components/landing/cross-chain-carousel";
 import { FarmPortfolioDemo } from "@/components/landing/farm-portfolio-demo";
 import { LiquidityGrid } from "@/components/landing/liquidity-grid";
+import { EasyProMode } from "@/components/landing/easy-pro-mode";
 
 type Feature = {
   label: string;
@@ -31,7 +32,7 @@ const features: Feature[] = [
     title: "Farm all Perp DEXs in one place",
     description:
       "Why swap between different DEXs when you can trade all of them right here.",
-    className: "lg:col-span-2",
+    className: "lg:col-span-3",
     renderContent: () => <FarmPortfolioDemo />,
   },
   {
@@ -39,10 +40,8 @@ const features: Feature[] = [
     title: "Easy/Pro mode",
     description:
       "Whether you are a Perp newbie or pro, trade the way you like. We give you the max flexibility on how you'd like to trade.",
-    className: "lg:col-span-4",
-    renderContent: () => (
-      <PlaceholderCard label="Mode toggler interaction coming soon" />
-    ),
+    className: "lg:col-span-3",
+    renderContent: () => <EasyProMode />,
   },
 ];
 
