@@ -1,4 +1,5 @@
 import { StarBorder } from "@/components/ui/star-border";
+import { RippleGrid } from "@/components/effects/ripple-grid";
 import { motion } from "motion/react";
 
 type EarlyAccessSectionProps = {
@@ -24,6 +25,10 @@ export function EarlyAccessSection({
         transition={{ duration: 0.65, ease: [0.22, 1, 0.36, 1] }}
       >
         <div className="relative isolate overflow-hidden px-6 py-24 text-center after:pointer-events-none after:absolute after:inset-0 after:inset-ring after:inset-ring-white/10 sm:rounded-3xl sm:px-16 after:sm:rounded-3xl">
+          <div className="absolute inset-0 -z-20">
+            <RippleGrid rippleIntensity={0.08} gridSize={9} glowIntensity={0.18} opacity={0.9} />
+          </div>
+          <div className="absolute inset-0 -z-10 bg-black/10 backdrop-blur-xs" />
           <motion.h2
             className="text-balance text-4xl font-semibold tracking-tight text-white sm:text-5xl"
             initial={{ opacity: 0, y: 24 }}
@@ -40,7 +45,7 @@ export function EarlyAccessSection({
             viewport={{ once: true, amount: 0.4 }}
             transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1], delay: 0.1 }}
           >
-            Join now and get rewarded. We'll let you know as soon as we're live.
+            Join now and get rewarded. We&apos;ll let you know as soon as we&apos;re live.
           </motion.p>
           <motion.div
             className="mt-10 flex items-center justify-center gap-x-6"
