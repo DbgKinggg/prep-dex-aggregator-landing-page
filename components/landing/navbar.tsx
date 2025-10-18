@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { track } from "@vercel/analytics/react";
 
 import { Button } from "@/components/ui/button";
 
@@ -13,6 +14,11 @@ export function LandingNavbar({
   walletAddress,
   onConnect,
 }: LandingNavbarProps) {
+  function handleConnect() {
+    track('wallet_connect_click');
+    onConnect();
+  }
+
   const displayLabel = walletAddress
     ? `${walletAddress.slice(0, 6)}...${walletAddress.slice(-4)}`
     : "Connect Wallet";
@@ -32,7 +38,7 @@ export function LandingNavbar({
           <h1 className="sr-only">Tangerine</h1>
         </div>
         <Button
-          onClick={onConnect}
+          onClick={handleConnect}
           variant="outline"
           className="cursor-pointer rounded-full border-white/20 bg-white/10 px-4 py-2 text-xs text-white transition-all hover:bg-white/20 sm:px-6 sm:py-2.5"
         >

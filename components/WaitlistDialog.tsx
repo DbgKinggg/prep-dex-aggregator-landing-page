@@ -6,6 +6,7 @@ import { useAppKit, useAppKitAccount, useDisconnect, useAppKitProvider } from '@
 import { useIsMobile } from '@/hooks/useIsMobile';
 import { toast } from 'sonner';
 import JSConfetti from 'js-confetti';
+import { track } from '@vercel/analytics/react';
 import {
   Dialog,
   DialogPopup,
@@ -62,16 +63,24 @@ export function WaitlistDialog({ open, onOpenChange }: WaitlistDialogProps) {
     }
   }, [walletAddress, onOpenChange]);
 
+  useEffect(() => {
+    if (open) {
+      track('waitlist_dialog_opened');
+    }
+  }, [open]);
+
   const handleConnectWallet = async () => {
     // Mark that we should reopen after login
     shouldReopenAfterLogin.current = true;
     // Close the dialog before opening wallet modal
     onOpenChange(false);
     openModal();
+    track('waitlist_dialog_connect_wallet_click');
   };
 
   const handleDisconnectWallet = async () => {
     disconnect();
+    track('wallet_disconnect_click');
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -79,10 +88,12 @@ export function WaitlistDialog({ open, onOpenChange }: WaitlistDialogProps) {
 
     if (!walletAddress) {
       toast.error('Please connect your wallet first');
+      track('waitlist_submit_missing_wallet');
       return;
     }
 
     setIsSubmitting(true);
+    track('waitlist_submit_attempt');
 
     try {
       // Create a message for the user to sign
@@ -111,6 +122,7 @@ export function WaitlistDialog({ open, onOpenChange }: WaitlistDialogProps) {
         console.error('Signature error:', signError);
         toast.error('Signature rejected. Please sign the message to continue.');
         setIsSubmitting(false);
+        track('waitlist_signature_rejected');
         return;
       }
 
@@ -134,14 +146,17 @@ export function WaitlistDialog({ open, onOpenChange }: WaitlistDialogProps) {
       if (!response.ok) {
         if (response.status === 409) {
           toast.warning('This wallet address is already registered on the waitlist.');
+          track('waitlist_submit_duplicate');
         } else {
           toast.error(data.error || 'Failed to join waitlist. Please try again.');
+          track('waitlist_submit_error', { status: response.status });
         }
         return;
       }
 
       // Success
       toast.success('Successfully joined the waitlist!');
+      track('waitlist_submit_success');
 
       // Trigger confetti with tangerine emojis
       confettiRef.current?.addConfetti({
@@ -155,6 +170,7 @@ export function WaitlistDialog({ open, onOpenChange }: WaitlistDialogProps) {
     } catch (error) {
       console.error('Waitlist submission error:', error);
       toast.error('An error occurred. Please try again.');
+      track('waitlist_submit_error');
     } finally {
       setIsSubmitting(false);
     }
@@ -230,7 +246,7 @@ export function WaitlistDialog({ open, onOpenChange }: WaitlistDialogProps) {
       <Drawer open={open} onOpenChange={onOpenChange}>
         <DrawerContent>
           <DrawerHeader>
-            <DrawerTitle>Join the Early Access</DrawerTitle>
+            <DrawerTitle>Join the Early Access Waitlist</DrawerTitle>
             <DrawerDescription>
               Connect your wallet to join the
               early access waitlist.
@@ -248,7 +264,7 @@ export function WaitlistDialog({ open, onOpenChange }: WaitlistDialogProps) {
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogPopup>
         <DialogHeader>
-          <DialogTitle>Join the Waitlist</DialogTitle>
+          <DialogTitle>Join the Early Access Waitlist</DialogTitle>
           <DialogDescription>
             Connect your wallet to join the early access waitlist.
           </DialogDescription>

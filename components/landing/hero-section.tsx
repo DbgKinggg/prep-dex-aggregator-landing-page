@@ -1,4 +1,5 @@
 import { Button } from "@/components/ui/button";
+import { track } from "@vercel/analytics/react";
 import { motion } from "motion/react";
 
 type HeroSectionProps = {
@@ -6,6 +7,11 @@ type HeroSectionProps = {
 };
 
 export function HeroSection({ onJoinWaitlist }: HeroSectionProps) {
+  const handleJoinWaitlist = () => {
+    track('cta_join_early_access_click');
+    onJoinWaitlist();
+  };
+
   return (
     <motion.section
       className="relative z-10 mx-2 flex min-h-[calc(100vh-100px)] flex-col items-center justify-center rounded-4xl px-4 text-center sm:px-6 md:mx-4"
@@ -68,7 +74,7 @@ export function HeroSection({ onJoinWaitlist }: HeroSectionProps) {
         >
           <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.97 }}>
             <Button
-              onClick={onJoinWaitlist}
+              onClick={handleJoinWaitlist}
               className="group relative inline-flex h-14 cursor-pointer items-center justify-center rounded-full bg-white px-8 py-6 text-base font-semibold text-primary-foreground shadow-[0_24px_80px_rgba(249,115,22,0.35)] transition-all duration-300 hover:shadow-[0_30px_100px_rgba(249,115,22,0.45)] hover:bg-white sm:h-[3.5rem]"
               size="lg"
             >

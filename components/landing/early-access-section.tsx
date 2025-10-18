@@ -1,5 +1,6 @@
 import { StarBorder } from "@/components/ui/star-border";
 import { RippleGrid } from "@/components/effects/ripple-grid";
+import { track } from "@vercel/analytics/react";
 import { motion } from "motion/react";
 
 type EarlyAccessSectionProps = {
@@ -9,6 +10,11 @@ type EarlyAccessSectionProps = {
 export function EarlyAccessSection({
   onJoinWaitlist,
 }: EarlyAccessSectionProps) {
+  const handleJoinWaitlist = () => {
+    track("cta_join_early_access_footer_click");
+    onJoinWaitlist();
+  };
+
   return (
     <motion.section
       className="py-16 sm:py-24"
@@ -54,7 +60,7 @@ export function EarlyAccessSection({
             viewport={{ once: true, amount: 0.4 }}
             transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1], delay: 0.18 }}
           >
-            <StarBorder onClick={onJoinWaitlist} className="cursor-pointer">
+            <StarBorder onClick={handleJoinWaitlist} className="cursor-pointer">
               Join Early Access
             </StarBorder>
           </motion.div>

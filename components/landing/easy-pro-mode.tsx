@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from "react";
+import { track } from "@vercel/analytics/react";
 import { motion } from "motion/react";
 
 import { ButtonGroup } from "@/components/ui/button-group";
@@ -33,7 +34,10 @@ export function EasyProMode() {
               <motion.button
                 key={key}
                 type="button"
-                onClick={() => setMode(key)}
+                onClick={() => {
+                  track(`mode_toggle_${key}`);
+                  setMode(key);
+                }}
                 className="relative flex-1 cursor-pointer select-none rounded-full px-6 py-2 text-sm font-semibold uppercase tracking-[0.25em] text-white/60 transition-colors sm:px-8"
                 whileHover={{ scale: isActive ? 1.02 : 1.04 }}
                 whileTap={{ scale: 0.96 }}

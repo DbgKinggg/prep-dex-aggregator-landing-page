@@ -1,4 +1,5 @@
 import type { ComponentProps, ComponentType } from "react";
+import { track } from "@vercel/analytics/react";
 import { motion } from "motion/react";
 
 type SocialIcon = ComponentType<ComponentProps<"svg">>;
@@ -57,6 +58,7 @@ export function LandingFooter({ links }: LandingFooterProps) {
                 href={item.href}
                 className="text-black hover:text-black/60"
                 target="_blank"
+                onClick={() => track(`social_click_${item.name.toLowerCase()}`)}
               >
                 <span className="sr-only">{item.name}</span>
                 <item.icon aria-hidden="true" className="size-6" />

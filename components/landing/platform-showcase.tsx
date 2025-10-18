@@ -1,26 +1,38 @@
 import Image from "next/image";
+import { track } from "@vercel/analytics/react";
 import { motion } from "motion/react";
 
-const platforms = [
+type Platform = {
+  name: string;
+  src: string;
+  href: string;
+  event: string;
+};
+
+const platforms: Platform[] = [
   {
     name: "Hyperliquid",
     src: "/images/platforms/hyperliquid-text.png",
     href: "https://hyperliquid.xyz",
+    event: "platform_hyperliquid_click",
   },
   {
     name: "Aster",
     src: "/images/platforms/aster-text.png",
-    href: "https://www.asterdex.com/",
+    href: "https://www.aster.finance/",
+    event: "platform_aster_click",
   },
   {
     name: "Lighter",
     src: "/images/platforms/lighter-text.png",
     href: "https://lighter.xyz/",
+    event: "platform_lighter_click",
   },
   {
     name: "Backpack",
     src: "/images/platforms/backpack-text.png",
     href: "https://backpack.exchange/",
+    event: "platform_backpack_click",
   },
 ];
 
@@ -70,7 +82,8 @@ export function PlatformShowcase() {
                 href={platform.href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex w-full items-center justify-center p-4"
+                className="inline-flex w-full items-center justify-center rounded-2xl bg-white/5 p-4 transition-colors hover:bg-white/10"
+                onClick={() => track(platform.event)}
               >
                 <Image
                   alt={platform.name}
