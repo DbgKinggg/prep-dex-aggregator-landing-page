@@ -1,16 +1,15 @@
 import Image from "next/image";
+import Link from "next/link";
 import { track } from "@vercel/analytics/react";
 
 import { Button } from "@/components/ui/button";
 
 type LandingNavbarProps = {
-  isMobile: boolean;
   walletAddress?: string;
   onConnect: () => void;
 };
 
 export function LandingNavbar({
-  isMobile,
   walletAddress,
   onConnect,
 }: LandingNavbarProps) {
@@ -26,17 +25,17 @@ export function LandingNavbar({
   return (
     <nav className="relative z-50 w-full px-4 py-6 sm:px-8">
       <div className="mx-auto flex max-w-7xl items-center justify-between">
-        <div className="flex items-center">
+        <Link href="/" className="flex items-center">
           <Image
-            src="/3d-logo-with-text-orange.png"
-            alt="Tangerine"
-            width={isMobile ? 100 : 140}
-            height={isMobile ? 21 : 30}
+            src="/logo-text-white.png"
+            alt="Tangerine logo"
+            width={480}
+            height={119}
             className="h-6 w-auto sm:h-7"
             priority
           />
           <h1 className="sr-only">Tangerine</h1>
-        </div>
+        </Link>
         <Button
           onClick={handleConnect}
           variant="outline"

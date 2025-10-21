@@ -12,7 +12,6 @@ import { HeroSection } from '@/components/landing/hero-section';
 import { HowItWorksSection } from '@/components/landing/how-it-works';
 import { LandingNavbar } from '@/components/landing/navbar';
 import { PlatformShowcase } from '@/components/landing/platform-showcase';
-import { useIsMobile } from '@/hooks/useIsMobile';
 
 const socialLinks: SocialLink[] = [
   {
@@ -27,7 +26,6 @@ const socialLinks: SocialLink[] = [
 ];
 
 export default function Home() {
-  const isMobile = useIsMobile();
   const [waitlistOpen, setWaitlistOpen] = useState(false);
   const { open } = useAppKit();
   const { address } = useAppKitAccount();
@@ -38,7 +36,6 @@ export default function Home() {
   return (
     <div className="relative min-h-screen w-full overflow-hidden bg-black">
       <LandingNavbar
-        isMobile={isMobile}
         walletAddress={walletAddress}
         onConnect={() => open()}
       />

@@ -1,3 +1,4 @@
+import Image from "next/image";
 import type { ComponentProps, ComponentType } from "react";
 import { track } from "@vercel/analytics/react";
 import { motion } from "motion/react";
@@ -36,13 +37,20 @@ export function LandingFooter({ links }: LandingFooterProps) {
         >
           <div className="flex w-full items-center justify-start gap-3 text-sm font-medium text-black/80 sm:w-auto">
             <motion.span
-              className="text-base text-black"
+              className="flex items-center gap-2 text-base text-black"
               initial={{ opacity: 0, y: 12 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.4 }}
               transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
             >
-              🍊 Tangerine&nbsp;©&nbsp;{new Date().getFullYear()}
+              <Image
+                src="/images/logo.svg"
+                alt="Tangerine logo"
+                width={20}
+                height={20}
+                className="h-5 w-5"
+              />
+              Tangerine&nbsp;©&nbsp;{new Date().getFullYear()}
             </motion.span>
           </div>
           <motion.div
