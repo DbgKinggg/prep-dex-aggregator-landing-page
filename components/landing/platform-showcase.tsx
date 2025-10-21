@@ -19,7 +19,7 @@ const platforms: Platform[] = [
   {
     name: "Aster",
     src: "/images/platforms/aster-text.png",
-    href: "https://www.aster.finance/",
+    href: "https://www.asterdex.com/",
     event: "platform_aster_click",
   },
   {
@@ -82,7 +82,7 @@ export function PlatformShowcase() {
                 href={platform.href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex w-full items-center justify-center rounded-2xl bg-white/5 p-4 transition-colors hover:bg-white/10"
+                className="inline-flex w-full items-center justify-center p-4 transition-colors"
                 onClick={() => track(platform.event)}
               >
                 <Image
