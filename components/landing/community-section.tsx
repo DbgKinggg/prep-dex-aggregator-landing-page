@@ -11,7 +11,7 @@ export function CommunitySection() {
     <>
       Experience onchain{" "}
       <span className="text-white">Perp trading</span>
-      like never before.
+      {" "}like never before.
     </>,
   ];
 
