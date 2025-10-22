@@ -11,6 +11,10 @@ const nextConfig: NextConfig = {
         protocol: 'https',
         hostname: 'tangerine.exchange',
       },
+      {
+        protocol: 'https',
+        hostname: 'tailwindcss.com',
+      },
     ],
   },
 
