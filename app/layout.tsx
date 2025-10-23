@@ -28,7 +28,7 @@ export const metadata: Metadata = {
         url: '/og-image.png',
         width: 1200,
         height: 630,
-        alt: 'Tangerine - Perp DEX Aggregator',
+        alt: 'Tangerine - The Perp DEX Aggregator',
       },
     ],
     locale: 'en_US',
@@ -36,10 +36,10 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: "Tangerine - The 1inch for Perp Trading",
-    description: "One interface for all perpetual DEXs. Turn market inefficiencies into profit opportunities.",
+    title: "Tangerine - The Perp DEX Aggregator",
+    description: "One interface for all perpetual DEXs. ",
     images: ['/og-image.png'],
-    creator: '@tangerine_fi',
+    creator: '@Tangerine_DEX',
   },
   robots: {
     index: true,
