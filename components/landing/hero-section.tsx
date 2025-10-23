@@ -58,8 +58,7 @@ export function HeroSection({ onJoinWaitlist }: HeroSectionProps) {
             },
           }}
         >
-          Trade and manage perp positions across Hyperliquid, Aster, Lighter,
-          and more DEXs.
+          The only Perp Dex aggregator you need
         </motion.p>
         <motion.div
           className="flex flex-col items-center justify-center gap-4 pt-10 sm:flex-row sm:gap-6"
