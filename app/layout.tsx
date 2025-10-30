@@ -36,10 +36,16 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: "Tangerine - The Perp DEX Aggregator",
-    description: "One interface for all perpetual DEXs. ",
-    images: ['/og-image.png'],
+    title: "Tangerine - The Perp Dex Aggregator",
+    description: "One interface for all perpetual DEXs.",
+    site: '@Tangerine_DEX',
     creator: '@Tangerine_DEX',
+    images: [
+      {
+        url: '/og-image.png',
+        alt: 'Tangerine - The Perp DEX Aggregator',
+      },
+    ],
   },
   robots: {
     index: true,
